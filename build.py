@@ -806,7 +806,7 @@ def main():
     _chapter_page("sources.html", "Sources and checks", "How the handwriting was read, what was verified online, and what was corrected.", sources_body, '<a href="index.html">Chapters</a> / Sources')
     # search index: one entry per heading, from the finished pages
     entries = []
-    for rel in ["index.html", "sources.html", "chapters/01-bonding-quantum/index.html", "chapters/02-elements-coordination/index.html", "chapters/03-organometallic/index.html", "chapters/04-solids/index.html"]:
+    for rel in ["chapters/04-solids/index.html", "chapters/01-bonding-quantum/index.html", "chapters/02-elements-coordination/index.html", "chapters/03-organometallic/index.html", "index.html", "sources.html"]:
         html = open(os.path.join(ROOT, rel), encoding="utf-8").read()
         main = html.split("<main", 1)[1].split("</main>", 1)[0] if "<main" in html else html
         parts = _re.split(r'<h[23] id="([^"]+)">(.*?)</h[23]>', main)
