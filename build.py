@@ -91,7 +91,7 @@ def fig_stacking():
             sty = f' style="animation-delay:{i*90}ms"' if anim and i else ""
             out += f'<circle{cls}{sty} cx="{x:.0f}" cy="{y:.0f}" r="16" fill="{fill}" stroke="{colour}" stroke-width="1.5"/>'
         out += f'<text x="{cx}" y="{cy+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="#fff">S</text>' if filled_centre else ""
-        out += f'<text x="{cx}" y="{cy+52}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{label}</text>'
+        out += f'<text x="{cx}" y="{cy+64}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{label}</text>'
         return out
     s += cluster(150, 100, INK, "A layer", filled_centre=True)
     s += cluster(166, 230, BLUE, "B layer in the notches", anim=True)
@@ -198,7 +198,7 @@ def fig_spinel():
     s+=f'<text x="420" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Inverse spinel B(AB)O{sub("4")}</text>'
     for (x,y,lab) in [(480,120,"B3+"),(560,120,"A2+"),(640,120,"B3+")]:
         cls = ' class="anim-pulse"' if lab == "A2+" else ""
-        s+=f'<circle{cls} cx="{x}" cy="{y}" r="26" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="12" fill="{INK}">{lab}</text>'
+        s+=f'<circle{cls} cx="{x}" cy="{y}" r="26" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="12" fill="{INK}">{lab}</text>'
     s+=f'<text x="420" y="180" font-family="Radio Canada, sans-serif" font-size="13" fill="{MUT}">Td: B3+ - Oct: A2+ + B3+</text><text x="420" y="210" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">Fe{sub("3")}O{sub("4")}, CoFe{sub("2")}O{sub("4")}, NiFe{sub("2")}O{sub("4")}</text><text x="420" y="232" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">CuFe{sub("2")}O{sub("4")}</text><text x="60" y="262" font-family="Radio Canada, sans-serif" font-size="14" fill="{ACC}">O2- forms a ccp / fcc array in both cases.</text></svg>'
     return s
 
@@ -219,7 +219,7 @@ def fig_defects():
         for c in range(4):
             if (r,c) == (1,1): continue
             s+=f'<circle cx="{430+c*52}" cy="{60+r*52}" r="16" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<rect x="465" y="95" width="32" height="32" fill="none" stroke="{ACC}" stroke-width="2" stroke-dasharray="4 3"/><circle cx="508" cy="86" r="10" fill="{ACC}"/>'
+    s+=f'<rect x="465" y="95" width="32" height="32" fill="none" stroke="{ACC}" stroke-width="2" stroke-dasharray="4 3"/><circle cx="516" cy="84" r="9" fill="{ACC}"/>'
     s+=f'<text x="420" y="215" font-family="Radio Canada, sans-serif" font-size="13" fill="{ACC}">ion in an interstitial gap</text>'
     s+=f'<text x="420" y="250" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Frenkel: ion leaves its site for</text><text x="420" y="275" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">an interstitial site, vacancy left</text></svg>'
     return s
@@ -240,7 +240,8 @@ def fig_lattice():
             colr = ACC if hl else INK
             s+=f'<polygon points="{poly(front)}" fill="none" stroke="{colr}" stroke-width="{wdt}"/><polygon points="{poly(back)}" fill="none" stroke="{colr}" stroke-width="{wdt}"/>'
             for a,b in zip(front, back): s+=f'<line x1="{a[0]}" y1="{a[1]}" x2="{b[0]}" y2="{b[1]}" stroke="{colr}" stroke-width="{wdt}"/>'
-    s+=f'<text x="90" y="250" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">a: bottom edge</text><text x="260" y="250" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">b: side edge</text><text x="430" y="250" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">c: left edge</text>'
+    s+=f'<text x="125" y="235" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">a</text><text x="172" y="180" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">b</text><text x="72" y="180" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">c</text>'
+    s+=f'<text x="90" y="275" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">a: bottom edge, b: side edge, c: left edge of the unit cell</text>'
     s+=f'<text x="90" y="14" font-family="Radio Canada, sans-serif" font-size="14" fill="{ACC}">one unit cell, highlighted</text></svg>'
     return s
 
@@ -266,7 +267,7 @@ def fig_wurtzite():
     s+=f'<polygon points="{poly(top)}" fill="none" stroke="{INK}" stroke-width="2"/><polygon points="{poly(bot)}" fill="none" stroke="{INK}" stroke-width="2"/>'
     for a,b in zip(top, bot): s+=f'<line x1="{a[0]:.0f}" y1="{a[1]:.0f}" x2="{b[0]:.0f}" y2="{b[1]:.0f}" stroke="{INK}" stroke-width="1.5"/>'
     for (x,y) in top+bot: s+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="10" fill="{BLUE}"/>'
-    s+=f'<circle cx="220" cy="150" r="10" fill="{ACC}"/>'
+    s+=f'<circle cx="250" cy="168" r="10" fill="{ACC}"/>'
     s+=f'<text x="400" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Wurtzite, ZnS: hexagonal prism</text><text x="400" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">S2- in an hcp array</text><text x="400" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">Zn2+ in half the tetrahedral holes</text><text x="400" y="180" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Coordination 4:4, as in zinc blende</text></svg>'
     return s
 
@@ -276,7 +277,7 @@ def fig_fluorite():
     # cube divided into 8 small cubes
     s+=f'<rect x="90" y="50" width="200" height="200" fill="none" stroke="{INK}" stroke-width="2"/><line x1="190" y1="50" x2="190" y2="250" stroke="{INK}" stroke-width="1"/><line x1="90" y1="150" x2="290" y2="150" stroke="{INK}" stroke-width="1"/>'
     s+=f'<line x1="90" y1="50" x2="140" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="50" x2="340" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="250" x2="340" y2="220" stroke="{INK}" stroke-width="1.5"/><line x1="140" y1="20" x2="340" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="340" y1="20" x2="340" y2="220" stroke="{INK}" stroke-width="1.5"/>'
-    for (x,y) in [(90,50),(290,50),(90,250),(290,250),(190,150),(140,20),(340,20),(340,220)]: s+=f'<circle cx="{x}" cy="{y}" r="11" fill="{BLUE}"/>'
+    for (x,y) in [(90,50),(290,50),(90,250),(290,250),(190,150),(215,35),(315,135),(140,20),(340,20),(340,220)]: s+=f'<circle cx="{x}" cy="{y}" r="11" fill="{BLUE}"/>'
     for (x,y) in [(140,100),(240,100),(140,200),(240,200)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{ACC}"/>'
     s+=f'<text x="400" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">Ca2+: corners and face centres</text><text x="400" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">F-: centres of the eight small cubes</text><text x="400" y="160" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Ca2+ coordinated by 8 F-</text><text x="400" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">F- coordinated by 4 Ca2+: 8:4</text></svg>'
     return s
@@ -287,7 +288,7 @@ def fig_rutile():
     # tetragonal box: one side longer than the others
     s+=f'<rect x="120" y="50" width="130" height="200" fill="none" stroke="{INK}" stroke-width="2"/><line x1="120" y1="50" x2="160" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="50" x2="290" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="250" x2="290" y2="225" stroke="{INK}" stroke-width="1.5"/><line x1="160" y1="25" x2="290" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="25" x2="290" y2="225" stroke="{INK}" stroke-width="1.5"/>'
     for (x,y) in [(120,50),(250,50),(120,250),(250,250),(160,25),(290,25),(160,225),(290,225)]: s+=f'<circle cx="{x}" cy="{y}" r="10" fill="{BLUE}"/>'
-    s+=f'<circle cx="185" cy="150" r="10" fill="{ACC}"/><circle cx="225" cy="110" r="8" fill="{ACC}"/>'
+    s+=f'<circle cx="185" cy="150" r="10" fill="{BLUE}"/><circle cx="150" cy="110" r="8" fill="{ACC}"/><circle cx="225" cy="190" r="8" fill="{ACC}"/>'
     s+=f'<text x="360" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Rutile, TiO2: tetragonal cell</text><text x="360" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">Ti4+: corners and body centre</text><text x="360" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">O2-: inside the cell</text><text x="360" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Ti octahedral (6), O trigonal (3)</text><text x="360" y="220" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">One side longer: body-centred</text><text x="360" y="250" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">tetragonal, not cubic</text></svg>'
     return s
 
@@ -300,7 +301,8 @@ def fig_diamond():
     s+=f'<polygon points="{poly(front)}" fill="none" stroke="{INK}" stroke-width="2"/><polygon points="{poly(back)}" fill="none" stroke="{INK}" stroke-width="2"/>'
     for a,b in zip(front, back): s+=f'<line x1="{a[0]}" y1="{a[1]}" x2="{b[0]}" y2="{b[1]}" stroke="{INK}" stroke-width="1.5"/>'
     for p in front+back: s+=f'<circle cx="{p[0]}" cy="{p[1]}" r="9" fill="{INK}"/>'
-    for (x,y) in [(200,150),(250,100),(130,200),(230,210)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{ACC}"/>'
+    for (x,y) in [(180,150),(210,30),(310,130)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{BLUE}"/>'
+    for (x,y) in [(220,170),(250,100),(130,200),(230,210)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{ACC}"/>'
     s+=f'<text x="400" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Diamond cubic: an fcc lattice</text><text x="400" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">4 more atoms inside the cell</text><text x="400" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">at 4 of the 8 tetrahedral holes</text><text x="400" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">8 atoms per cell, CN 4, 34% filled</text></svg>'
     return s
 
@@ -312,7 +314,7 @@ def fig_bcc_layers():
     s+=f'<text x="60" y="230" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">First layer: square packing</text>'
     s+=f'<line x1="60" y1="50" x2="180" y2="170" stroke="{ACC}" stroke-width="1.5"/>'
     for r in range(4):
-        for c in range(4): s+=f'<circle cx="{430+16+c*32}" cy="{60+r*32}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
+        for c in range(4): s+=f'<circle cx="{430+16+c*32}" cy="{76+r*32}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
     s+=f'<text x="420" y="230" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Second layer sits in the notches</text></svg>'
     return s
 
@@ -333,18 +335,18 @@ def fig_hcp_prism():
     return s
 
 def fig_ccp12():
-    s=svg_open(760,380)
-    s+=f'<rect width="760" height="380" fill="{PAPER}"/>'
-    for (x,y,n) in [(350,60,"7"),(410,60,"8"),(380,105,"9")]:
-        s+=f'<circle cx="{x}" cy="{y}" r="20" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{n}</text>'
-    s+=f'<text x="450" y="85" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">A layer, above</text>'
-    for i,(x,y) in enumerate([(380,185),(445,222),(445,297),(380,335),(315,297),(315,222)]):
-        s+=f'<circle cx="{x}" cy="{y}" r="20" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{i+1}</text>'
-    s+=f'<text x="380" y="265" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="16" fill="{ACC}">★</text>'
-    s+=f'<text x="480" y="265" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">B layer: six around the centre</text>'
-    for (x,y,n) in [(350,360,"10"),(410,360,"11")]:
-        s+=f'<circle cx="{x}" cy="{y}" r="20" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{n}</text>'
-    s+=f'<text x="450" y="365" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">C layer, below: 12 nearest neighbours in all</text></svg>'
+    s=svg_open(760,430)
+    s+=f'<rect width="760" height="430" fill="{PAPER}"/>'
+    for (x,y,n) in [(352,52,"7"),(408,52,"8"),(380,98,"9")]:
+        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{n}</text>'
+    s+=f'<text x="450" y="75" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">A layer, above</text>'
+    for i,(x,y) in enumerate([(380,178),(434,209),(434,271),(380,302),(326,271),(326,209)]):
+        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{i+1}</text>'
+    s+=f'<text x="380" y="245" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="16" fill="{ACC}">★</text>'
+    s+=f'<text x="470" y="245" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">B layer: six around the centre</text>'
+    for (x,y,n) in [(352,372,"10"),(408,372,"11"),(380,410,"12")]:
+        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{n}</text>'
+    s+=f'<text x="450" y="380" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">C layer, below</text></svg>'
     return s
 
 # ---- template ----
@@ -496,7 +498,7 @@ B06 = f"""
 """ + check_box("A line to read with care", "The notes say, in the bcc paragraph, that the number of neighbours around any sphere is four. That is the in-plane count in the drawing, not the coordination number of bcc. The coordination number of bcc is 8, as the notes themselves state in the next sentence.")
 
 B07 = f"""
-{fig("A tetrahedral void is bounded by four spheres; an octahedral void by six.", fig_voids())}
+{fig("A tetrahedral void is bounded by four spheres; an octahedral void by six. The drawings are sections through the voids.", fig_voids())}
 <p>The empty spaces left between packed spheres are called interstitial voids. Two types matter.</p>
 <table><thead><tr><th>Void</th><th>Surrounded by</th><th class="num">Per sphere</th><th class="num">Largest sphere that fits</th></tr></thead><tbody>
 <tr><td>Tetrahedral</td><td>Four spheres at the corners of a tetrahedron</td><td class="num">2</td><td class="num">0.225 R</td></tr>
@@ -597,7 +599,7 @@ B13 = f"""
 <tr><td class="num">&gt; 1</td><td>Hexagonal or tetragonal</td><td>A-site cation too large; A site overbonded</td><td>BaTiO<sub>3</sub> (t ≈ 1.06), BaNiO<sub>3</sub></td></tr>
 <tr><td class="num">0.9 to 1</td><td>Cubic</td><td>A, B and O packed ideally; BO<sub>6</sub> octahedra untilted</td><td>SrTiO<sub>3</sub> (t ≈ 1.00), CaTiO<sub>3</sub> (t ≈ 0.97, orthorhombic despite t near 1)</td></tr>
 <tr><td class="num">0.71 to 0.9</td><td>Orthorhombic / rhombohedral</td><td>A-site cation too small; BO<sub>6</sub> octahedra tilt and rotate</td><td>GdFeO<sub>3</sub> (t ≈ 0.88)</td></tr>
-<tr><td class="num">Below about 0.8</td><td>Different structures</td><td>Perovskite framework cannot be sustained; ilmenite-type structures form instead</td><td>MgTiO<sub>3</sub> (t = 0.81), FeTiO<sub>3</sub> (t ≈ 0.82)</td></tr>
+<tr><td class="num">About 0.8</td><td>Different structures</td><td>Perovskite framework gives way to ilmenite-type structures; the boundary is not sharp</td><td>MgTiO<sub>3</sub> (t = 0.81), FeTiO<sub>3</sub> (t ≈ 0.82)</td></tr>
 </tbody></table>
 """ + check_box("Checked against the standard table", "The ranges in the table are a guide, not a sharp boundary. The notes give collapse below t = 0.8 or above t = 1.05, with MgTiO<sub>3</sub> (t = 0.81 in the notes) as a non-perovskite example. That limit is arguably closer to where the real ilmenites fall than the 0.71 boundary is: MgTiO<sub>3</sub> (t = 0.81) and FeTiO<sub>3</sub> (t ≈ 0.82) are both ilmenite, even though they lie inside the nominal perovskite range. CaTiO<sub>3</sub> itself is orthorhombic, not cubic, at room temperature, despite t ≈ 0.97.")
 
