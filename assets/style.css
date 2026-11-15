@@ -64,7 +64,7 @@ main h2 { margin-top: var(--space-2xl); margin-bottom: var(--space-md); }
 main h3 { margin-top: var(--space-xl); margin-bottom: var(--space-sm); }
 .lead { font-size: 1.25rem; line-height: 1.5; margin-bottom: var(--space-lg); }
 figure { margin: var(--space-2xl) 0; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-lg); overflow-x: auto; }
-figure svg { width: 100%; height: auto; min-width: 520px; }
+figure svg { display: block; width: 100%; height: auto; }
 figcaption { font-size: 0.875rem; color: var(--muted); margin-top: var(--space-md); }
 .fig-pair { display: flex; flex-direction: column; gap: var(--space-lg); }
 .fig-side { display: flex; flex-direction: column; gap: var(--space-lg); }
@@ -117,6 +117,7 @@ figure svg .anim-pulse { animation: pulse 2.8s ease-in-out infinite; }
 
 /* ---- mobile ---- */
 @media (max-width: 60rem) {
+  figure svg { min-width: 520px; }
   table { overflow-x: visible; }
   table thead { display: none; }
   table tbody { display: block; }
