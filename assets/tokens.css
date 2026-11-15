@@ -2,8 +2,8 @@
 :root {
   color-scheme: light;
   --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px;
-  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.0625rem;
-  --text-display: 2.75rem; --text-section: 1.875rem; --text-title: 1.375rem; --text-lead: 1.25rem;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1.25rem; --text-lg: 1.0625rem;
+  --text-display: 2.75rem; --text-section: 1.875rem; --text-title: 1.4375rem; --text-lead: 1.25rem;
   --dur-fast: 150ms; --dur-med: 250ms; --dur-slow: 500ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --paper: #FAF7F1; --surface: #FFFDF8; --ink: #20242B; --muted: #5A6470;
