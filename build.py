@@ -40,6 +40,15 @@ def cube_svg(kind="sc", title=""):
 def fig(caption, inner):
     return f'<figure>{inner}<figcaption>{caption}</figcaption></figure>'
 
+def split2(s, w=760, h=300, cut=380):
+    # one SVG with two drawings side by side -> two SVGs, left and right halves
+    a = s.replace(f'viewBox="0 0 {w} {h}"', f'viewBox="0 0 {cut} {h}"', 1)
+    b = s.replace(f'viewBox="0 0 {w} {h}"', f'viewBox="{cut} 0 {w-cut} {h}"', 1)
+    return a, b
+
+def fig_pair(caption, inner_a, inner_b):
+    return f'<figure><div class="fig-pair">{inner_a}{inner_b}</div><figcaption>{caption}</figcaption></figure>'
+
 # ---- individual figures ----
 def fig_order():
     s=svg_open(760,300)
@@ -76,7 +85,7 @@ def fig_packing():
         off=20 if r%2 else 0
         for c in range(4): s+=f'<circle class="anim-drop" style="animation-delay:{r*120}ms" cx="{430+off+c*40}" cy="{180+r*35}" r="20" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
     s+=f'<text x="420" y="310" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Hexagonal ABAB: CN = 6</text></svg>'
-    return s
+    return split2(s, 760, 320)
 
 def fig_stacking():
     s=svg_open(760,340)
@@ -99,14 +108,14 @@ def fig_stacking():
     s += f'<line x1="260" y1="100" x2="330" y2="100" stroke="{INK}" stroke-width="1.5"/><text x="265" y="88" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">ABAB</text>'
     s += f'<line x1="276" y1="230" x2="346" y2="230" stroke="{INK}" stroke-width="1.5"/><text x="281" y="218" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">ABC</text>'
     # hexagonal prism (hcp)
-    hx = [(400 + 55*dx, 100 + 55*dy) for dx, dy in [(1,0),(0.5,0.866),(-0.5,0.866),(-1,0),(-0.5,-0.866),(0.5,-0.866)]]
+    hx = [(440 + 55*dx, 100 + 55*dy) for dx, dy in [(1,0),(0.5,0.866),(-0.5,0.866),(-1,0),(-0.5,-0.866),(0.5,-0.866)]]
     pts = " ".join(f"{x:.0f},{y:.0f}" for x, y in hx)
     s += f'<polygon points="{pts}" fill="none" stroke="{INK}" stroke-width="2"/>'
-    s += f'<text x="400" y="190" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">hcp prism</text>'
+    s += f'<text x="440" y="190" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">hcp prism</text>'
     # cube (ccp)
-    s += f'<rect x="560" y="180" width="90" height="90" fill="none" stroke="{BLUE}" stroke-width="2"/><polygon points="560,180 590,150 680,150 650,180" fill="none" stroke="{BLUE}" stroke-width="1.5"/><line x1="650" y1="180" x2="680" y2="150" stroke="{BLUE}" stroke-width="1.5"/><line x1="650" y1="270" x2="680" y2="240" stroke="{BLUE}" stroke-width="1.5"/><line x1="680" y1="150" x2="680" y2="240" stroke="{BLUE}" stroke-width="1.5"/>'
-    s += f'<text x="605" y="310" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">ccp cube</text></svg>'
-    return s
+    s += f'<rect x="600" y="180" width="90" height="90" fill="none" stroke="{BLUE}" stroke-width="2"/><polygon points="600,180 630,150 720,150 690,180" fill="none" stroke="{BLUE}" stroke-width="1.5"/><line x1="690" y1="180" x2="720" y2="150" stroke="{BLUE}" stroke-width="1.5"/><line x1="690" y1="270" x2="720" y2="240" stroke="{BLUE}" stroke-width="1.5"/><line x1="720" y1="150" x2="720" y2="240" stroke="{BLUE}" stroke-width="1.5"/>'
+    s += f'<text x="645" y="310" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">ccp cube</text></svg>'
+    return split2(s, 760, 340)
 
 def fig_voids():
     s=svg_open(760,320)
@@ -117,7 +126,7 @@ def fig_voids():
     # octahedral: three circles in a triangle, as the notes draw it
     for (x,y) in [(480,205),(600,205),(540,105)]: s+=f'<circle cx="{x}" cy="{y}" r="38" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
     s+=f'<circle cx="540" cy="172" r="13" fill="{ACC}"/><text x="450" y="290" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Octahedral void: 6 spheres</text><text x="450" y="312" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">r(void) = 0.414 R, 1 per sphere</text></svg>'
-    return s
+    return split2(s, 760, 320)
 
 def fig_radius():
     s=svg_open(760,320)
@@ -186,7 +195,7 @@ def fig_cfse():
     s+=f'<line x1="660" y1="100" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="100" x2="660" y2="100" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="150" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><text x="672" y="130" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">{d_t}</text>'
     s+=f'<text x="460" y="235" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">{d_t} = 4/9 {d_o}</text>'
     s+=f'<text x="460" y="262" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Splitting is inverted and smaller</text></svg>'
-    return s
+    return split2(s, 760, 300)
 
 def fig_spinel():
     s=svg_open(760,290)
@@ -199,8 +208,8 @@ def fig_spinel():
     for (x,y,lab) in [(480,120,"B3+"),(560,120,"A2+"),(640,120,"B3+")]:
         cls = ' class="anim-pulse"' if lab == "A2+" else ""
         s+=f'<circle{cls} cx="{x}" cy="{y}" r="26" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{lab}</text>'
-    s+=f'<text x="420" y="180" font-family="Source Sans 3, sans-serif" font-size="13" fill="{MUT}">Td: B3+ - Oct: A2+ + B3+</text><text x="420" y="210" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">Fe{sub("3")}O{sub("4")}, CoFe{sub("2")}O{sub("4")}, NiFe{sub("2")}O{sub("4")}</text><text x="420" y="232" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">CuFe{sub("2")}O{sub("4")}</text><text x="60" y="262" font-family="Source Sans 3, sans-serif" font-size="14" fill="{ACC}">O2- forms a ccp / fcc array in both cases.</text></svg>'
-    return s
+    s+=f'<text x="420" y="180" font-family="Source Sans 3, sans-serif" font-size="13" fill="{MUT}">Td: B3+ - Oct: A2+ + B3+</text><text x="420" y="210" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">Fe{sub("3")}O{sub("4")}, CoFe{sub("2")}O{sub("4")}, NiFe{sub("2")}O{sub("4")}</text><text x="420" y="232" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">CuFe{sub("2")}O{sub("4")}</text></svg>'
+    return split2(s, 760, 290)
 
 def fig_defects():
     s=svg_open(760,300)
@@ -222,7 +231,7 @@ def fig_defects():
     s+=f'<rect x="465" y="95" width="32" height="32" fill="none" stroke="{ACC}" stroke-width="2" stroke-dasharray="4 3"/><circle cx="516" cy="84" r="9" fill="{ACC}"/>'
     s+=f'<text x="420" y="215" font-family="Source Sans 3, sans-serif" font-size="13" fill="{ACC}">ion in an interstitial gap</text>'
     s+=f'<text x="420" y="250" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Frenkel: ion leaves its site for</text><text x="420" y="275" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">an interstitial site, vacancy left</text></svg>'
-    return s
+    return split2(s, 760, 300)
 
 
 def fig_lattice():
@@ -353,18 +362,19 @@ def fig_ccp12():
 def page(rel, title, lede, body, crumb=""):
     depth = rel.count("/")
     cls = "home" if rel == "index.html" else "page"
-    def hero_cube(x0, label, kind):
+    def hero_cube(x0, label, kind, delay=0):
         front=[(x0,160),(x0+80,160),(x0+80,80),(x0,80)]
         back=[(a+20,b-20) for a,b in front]
         poly=lambda pts: " ".join(f"{a},{b}" for a,b in pts)
-        g=f'<g class="cube"><path d="M{x0} 160 L{x0} 80 L{x0+80} 80 L{x0+80} 160 Z M{x0+20} 140 L{x0+20} 60 L{x0+100} 60 L{x0+100} 140 Z M{x0} 80 L{x0+20} 60 M{x0+80} 80 L{x0+100} 60 M{x0+80} 160 L{x0+100} 140 M{x0} 160 L{x0+20} 140" fill="none" stroke="#FAF7F1" stroke-width="2"/>'
+        g=f'<g class="cube" style="animation-delay:{delay}s"><path d="M{x0} 160 L{x0} 80 L{x0+80} 80 L{x0+80} 160 Z M{x0+20} 140 L{x0+20} 60 L{x0+100} 60 L{x0+100} 140 Z M{x0} 80 L{x0+20} 60 M{x0+80} 80 L{x0+100} 60 M{x0+80} 160 L{x0+100} 140 M{x0} 160 L{x0+20} 140" fill="none" stroke="#FAF7F1" stroke-width="2"/>'
         for (x,y) in front+back: g+=f'<circle cx="{x}" cy="{y}" r="7" fill="#FAF7F1"/>'
         if kind=="bcc": g+=f'<circle cx="{x0+50}" cy="{110}" r="7" fill="#FAF7F1"/>'
         if kind=="fcc":
             g+=f'<circle cx="{x0+40}" cy="{120}" r="7" fill="#FAF7F1"/><circle cx="{x0+50}" cy="{70}" r="7" fill="#FAF7F1"/><circle cx="{x0+90}" cy="{110}" r="7" fill="#FAF7F1"/>'
         g+=f'<text x="{x0}" y="200" fill="#FAF7F1" font-family="Source Sans 3, sans-serif" font-size="15">{label}</text></g>'
         return g
-    field = '<figure class="field hero-field"><svg viewBox="0 0 720 220" role="img" aria-label="Simple cubic, body-centred cubic and face-centred cubic unit cells">' + hero_cube(40, "Simple cubic", "sc") + hero_cube(280, "Body-centred cubic", "bcc") + hero_cube(520, "Face-centred cubic", "fcc") + '</svg></figure>'
+    cubes = "".join(f'<svg viewBox="0 0 200 220" aria-hidden="true">' + hero_cube(40, label, kind, delay) + '</svg>' for label, kind, delay in [("Simple cubic", "sc", 0), ("Body-centred cubic", "bcc", 0.6), ("Face-centred cubic", "fcc", 1.2)])
+    field = '<figure class="field hero-field" aria-label="Simple cubic, body-centred cubic and face-centred cubic unit cells"><div class="hero-cubes">' + cubes + '</div></figure>'
     prefix = "../" * depth if depth else ""
     # rel like chapters/01.../x.html -> depth 2, prefix ../../ ; index at root depth 0
     return f"""<!doctype html>
@@ -475,7 +485,7 @@ B04 = f"""
 <div class="formula">Corners: 8 × 1/8 = 1<br>Faces: 6 × 1/2 = 3<br>Total = 4 atoms per unit cell</div>
 """
 B05 = f"""
-{fig("One dimension, then two: square packing is less efficient than hexagonal packing.", fig_packing())}
+{fig_pair("One dimension, then two: square packing is less efficient than hexagonal packing.", *fig_packing())}
 <h2>Close packing in one dimension</h2>
 <p>Spheres are placed in a row, each touching two neighbours. Coordination number = 2.</p>
 <h2>Close packing in two dimensions</h2>
@@ -483,7 +493,7 @@ B05 = f"""
 <p><strong>Hexagonal packing (ABAB type).</strong> The second row sits in the depressions (holes) of the first row. High efficient, this is the closest packing in two dimensions. Each sphere touches six neighbours. Coordination number = 6.</p>
 """
 B06 = f"""
-{fig("Third layer repeats the first (ABAB, hcp) or takes a new position (ABCABC, ccp).", fig_stacking())}
+{fig_pair("Third layer repeats the first (ABAB, hcp) or takes a new position (ABCABC, ccp).", *fig_stacking())}
 <p>To build a crystal in three dimensions, close-packed layers are stacked one on top of the other in a regular way. Consider a sphere S in the first layer: spheres in the next layer nestle in the notches at the positions marked with dots. Three of these will make contact with S. In the second layer there is a notch over S, but there are also notches over the positions marked with crosses. The third layer may repeat the arrangement of the first layer, or it may not.</p>
 <p>Such a pattern of packing of spheres in three dimensions is referred to as hexagonal close packing. It is called hexagonal because a six-fold (C<sub>6</sub>) axis runs perpendicular to the plane of the close-packed layer, present in all the stacked layers.</p>
 <ul><li><strong>If the third layer repeats the first,</strong> there are only two kinds of layer, A and B, and the pattern is ABAB… This is the hexagonal close-packed (hcp) structure.</li>
@@ -504,7 +514,7 @@ B06 = f"""
 """ + check_box("A line to read with care", "The notes say, in the bcc paragraph, that the number of neighbours around any sphere is four. That is the in-plane count in the drawing, not the coordination number of bcc. The coordination number of bcc is 8, as the notes themselves state in the next sentence.")
 
 B07 = f"""
-{fig("A tetrahedral void is bounded by four spheres; an octahedral void by six. The drawings are sections through the voids.", fig_voids())}
+{fig_pair("A tetrahedral void is bounded by four spheres; an octahedral void by six. The drawings are sections through the voids.", *fig_voids())}
 <p>The empty spaces left between packed spheres are called interstitial voids. Two types matter.</p>
 <table><thead><tr><th>Void</th><th>Surrounded by</th><th class="num">Per sphere</th><th class="num">Largest sphere that fits</th></tr></thead><tbody>
 <tr><td>Tetrahedral</td><td>Four spheres at the corners of a tetrahedron</td><td class="num">2</td><td class="num">0.225 R</td></tr>
@@ -562,7 +572,7 @@ B10 = f"""
 <p>The unit cell of the rutile lattice is a given figure. The cation is octahedrally surrounded by six anions, while the anion (O<sup>2−</sup>) is trigonally surrounded by three cations. Rutile has a low-symmetry anion sublattice that fits neither a simple cubic nor an fcc lattice. The cation sublattice is a distorted body-centred cube, because one side of the cube differs from the others, the cation sublattice is actually body-centred tetragonal. The unit cell is tetragonal.</p>
 """
 B11 = f"""
-{fig("Schottky: vacancies in pairs. Frenkel: a displaced ion and the vacancy it leaves.", fig_defects())}
+{fig_pair("Schottky: vacancies in pairs. Frenkel: a displaced ion and the vacancy it leaves.", *fig_defects())}
 <p>There are different types of imperfection, such as point, surface and volume imperfections. Point defects are zero-dimensional, occurring at a single lattice site; extended defects may be one, two or three-dimensional (for example a stacking fault). Defects can also be classified as intrinsic and extrinsic.</p>
 <p>Point defects in ionic crystals fall into two groups: stoichiometric defects (Schottky and Frenkel) and non-stoichiometric defects. Intrinsic defects (Schottky and Frenkel defects) occur in the pure crystal, while extrinsic defects originate from impurities present in the crystal. Defects can largely influence physical properties such as mechanical strength, electrical conductivity, colour and chemical reactivity. In ionic crystals only point imperfections are important.</p>
 <h2>Point imperfections</h2>
@@ -610,7 +620,7 @@ B13 = f"""
 """ + check_box("Checked against the standard table", "The ranges in the table are a guide, not a sharp boundary. The notes give collapse below t = 0.8 or above t = 1.05, with MgTiO<sub>3</sub> (t = 0.81 in the notes) as a non-perovskite example. That limit is arguably closer to where the real ilmenites fall than the 0.71 boundary is: MgTiO<sub>3</sub> (t = 0.81) and FeTiO<sub>3</sub> (t ≈ 0.82) are both ilmenite, even though they lie inside the nominal perovskite range. CaTiO<sub>3</sub> itself is orthorhombic, not cubic, at room temperature, despite t ≈ 0.97.")
 
 B14 = f"""
-{fig("Octahedral splitting is larger; tetrahedral splitting is inverted and smaller.", fig_cfse())}
+{fig_pair("Octahedral splitting is larger; tetrahedral splitting is inverted and smaller.", *fig_cfse())}
 <p>This is the page in the photograph you sent. It is the last page of the notes, and it states the rule that decides normal against inverse spinel.</p>
 <p class="quote"><strong>From the notes, transcribed:</strong> “This generally takes place [in] transition metal oxide. Generally the site selection is governed by the relative change of CFSE (Crystal Field Stabilization Energy) in occupying the Oct and Td holes.”</p>
 <p>The crossed-out words in the photograph are “crystal” (before CFSE) and “octa” (before “oct”). The sentence is about spinel oxides, AB<sub>2</sub>O<sub>4</sub>.</p>
@@ -621,7 +631,7 @@ B14 = f"""
 <h2>Inverse spinel</h2>
 <p>In an inverse spinel, half of the B ions occupy 1/8 of the tetrahedral holes, and A and the other half of B occupy 1/2 of the octahedral holes in the ccp array of O<sup>2−</sup>. In an inverse spinel the A<sup>2+</sup> ion has a strong tendency to occupy octahedral holes, which is why the B<sup>3+</sup> ion is displaced into the tetrahedral hole.</p>
 <div class="formula">Inverse: B<sup>III</sup><sub>tet</sub> [A<sup>II</sup> B<sup>III</sup>]<sub>oct</sub> O<sub>4</sub></div>
-{fig("Normal against inverse: which cation sits in which hole.", fig_spinel())}
+{fig_pair("Normal against inverse: which cation sits in which hole. O2- forms a ccp / fcc array in both cases.", *fig_spinel())}
 <h2>Why CFSE decides it</h2>
 <p>For transition-metal oxide spinels, O<sup>2−</sup> is a weak-field ligand, so the ions are usually high spin. The structure that forms is the one with the larger total CFSE. The octahedral site preference energy (OSPE) is CFSE(oct) − CFSE(tet), with Δ<sub>t</sub> = 4/9 Δ<sub>o</sub>. Its size depends on the d-electron count:</p>
 <table><thead><tr><th>d count (high spin)</th><th class="num">CFSE oct (Δ<sub>o</sub>)</th><th class="num">CFSE tet (Δ<sub>o</sub>)</th><th class="num">OSPE (Δ<sub>o</sub>)</th></tr></thead><tbody>
