@@ -6,7 +6,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 def svg_open(w=760, h=300, vb=None):
     vb = vb or f"0 0 {w} {h}"
     return f'<svg viewBox="{vb}" width="{w}" height="{h}" role="img" xmlns="http://www.w3.org/2000/svg">'
-INK="#1d2340"; MUT="#5a6373"; ACC="#d92d20"; PAPER="#f4f3ee"; BLUE="#3048c8"; GREEN="#3048c8"; AMBER="#d92d20"
+INK="#20242B"; MUT="#5A6470"; ACC="#C2410C"; PAPER="#FFFFFF"; BLUE="#0E7490"; GREEN="#0E7490"; AMBER="#C2410C"
 
 def cube_svg(kind="sc", title=""):
     # front face (60,60)-(260,260), depth offset 70,-50 ; schematic isometric-ish cube
@@ -29,12 +29,12 @@ def cube_svg(kind="sc", title=""):
         s+=dot(160,160,9,BLUE)  # front face centre
         s+=dot(195,35,9,BLUE)   # top face centre approx
         s+=dot(295,155,9,BLUE)  # right face centre approx
-        s+=f'<text x="380" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">faces: 6 x 1/2 = 3</text><text x="380" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">total = 4 atoms</text>'
+        s+=f'<text x="380" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">faces: 6 x 1/2 = 3</text><text x="380" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">total = 4 atoms</text>'
     elif kind=="bcc":
-        s+=f'<text x="380" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">centre: 1 (unshared)</text><text x="380" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">total = 2 atoms</text>'
+        s+=f'<text x="380" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">centre: 1 (unshared)</text><text x="380" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">total = 2 atoms</text>'
     else:
-        s+=f'<text x="380" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">total = 1 atom</text>'
-    s+=f'<text x="60" y="290" font-family="Radio Canada, sans-serif" font-size="14" fill="{MUT}">{title}</text></svg>'
+        s+=f'<text x="380" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">total = 1 atom</text>'
+    s+=f'<text x="60" y="290" font-family="Source Sans 3, sans-serif" font-size="14" fill="{MUT}">{title}</text></svg>'
     return s
 
 def fig(caption, inner):
@@ -47,19 +47,19 @@ def fig_order():
     for r in range(4):
         for c in range(5):
             s+=f'<circle cx="{70+c*52}" cy="{60+r*48}" r="11" fill="none" stroke="{INK}" stroke-width="1.5"/>'
-    s+=f'<text x="60" y="270" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Crystalline: long range order</text>'
+    s+=f'<text x="60" y="270" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Crystalline: long range order</text>'
     import random; random.seed(7)
     for _ in range(20):
         x=430+random.randint(0,260); y=40+random.randint(0,180)
         s+=f'<circle cx="{x}" cy="{y}" r="11" fill="none" stroke="{MUT}" stroke-width="1.5"/>'
-    s+=f'<text x="430" y="270" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Amorphous: short range order only</text></svg>'
+    s+=f'<text x="430" y="270" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Amorphous: short range order only</text></svg>'
     return s
 
 def fig_axes():
     s=svg_open(760,300)
     s+=f'<rect width="760" height="300" fill="{PAPER}"/><line x1="180" y1="200" x2="420" y2="200" stroke="{INK}" stroke-width="2"/><line x1="180" y1="200" x2="180" y2="60" stroke="{INK}" stroke-width="2"/><line x1="180" y1="200" x2="330" y2="110" stroke="{INK}" stroke-width="2"/>'
-    s+=f'<text x="430" y="205" font-family="Radio Canada, sans-serif" font-size="16" fill="{INK}">a</text><text x="170" y="45" font-family="Radio Canada, sans-serif" font-size="16" fill="{INK}">c</text><text x="340" y="105" font-family="Radio Canada, sans-serif" font-size="16" fill="{INK}">b</text>'
-    s+=f'<text x="480" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">alpha: between b and c</text><text x="480" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">beta: between a and c</text><text x="480" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">gamma: between a and b</text><text x="480" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">6 lattice parameters:</text><text x="480" y="215" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">a, b, c, alpha, beta, gamma</text></svg>'
+    s+=f'<text x="430" y="205" font-family="Source Sans 3, sans-serif" font-size="16" fill="{INK}">a</text><text x="170" y="45" font-family="Source Sans 3, sans-serif" font-size="16" fill="{INK}">c</text><text x="340" y="105" font-family="Source Sans 3, sans-serif" font-size="16" fill="{INK}">b</text>'
+    s+=f'<text x="480" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">alpha: between b and c</text><text x="480" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">beta: between a and c</text><text x="480" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">gamma: between a and b</text><text x="480" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">6 lattice parameters:</text><text x="480" y="215" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">a, b, c, alpha, beta, gamma</text></svg>'
     return s
 
 def fig_packing():
@@ -68,14 +68,14 @@ def fig_packing():
     for i in range(5):
         fill = INK if i == 2 else "none"
         s+=f'<circle cx="{70+i*40}" cy="70" r="20" fill="{fill}" stroke="{INK}" stroke-width="1.5"/>'
-    s+=f'<text x="60" y="130" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">1D row: CN = 2</text>'
+    s+=f'<text x="60" y="130" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">1D row: CN = 2</text>'
     for r in range(3):
         for c in range(4): s+=f'<circle cx="{70+c*40}" cy="{180+r*40}" r="20" fill="none" stroke="{INK}" stroke-width="1.5"/>'
-    s+=f'<text x="60" y="310" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Square packing AAA: CN = 4</text>'
+    s+=f'<text x="60" y="310" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Square packing AAA: CN = 4</text>'
     for r in range(3):
         off=20 if r%2 else 0
         for c in range(4): s+=f'<circle class="anim-drop" style="animation-delay:{r*120}ms" cx="{430+off+c*40}" cy="{180+r*35}" r="20" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<text x="420" y="310" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Hexagonal ABAB: CN = 6</text></svg>'
+    s+=f'<text x="420" y="310" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Hexagonal ABAB: CN = 6</text></svg>'
     return s
 
 def fig_stacking():
@@ -90,22 +90,22 @@ def fig_stacking():
             cls = ' class="anim-drop"' if anim and i else ""
             sty = f' style="animation-delay:{i*90}ms"' if anim and i else ""
             out += f'<circle{cls}{sty} cx="{x:.0f}" cy="{y:.0f}" r="16" fill="{fill}" stroke="{colour}" stroke-width="1.5"/>'
-        out += f'<text x="{cx}" y="{cy+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="#fff">S</text>' if filled_centre else ""
-        out += f'<text x="{cx}" y="{cy+64}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{label}</text>'
+        out += f'<text x="{cx}" y="{cy+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="#fff">S</text>' if filled_centre else ""
+        out += f'<text x="{cx}" y="{cy+64}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">{label}</text>'
         return out
     s += cluster(150, 100, INK, "A layer", filled_centre=True)
     s += cluster(166, 230, BLUE, "B layer in the notches", anim=True)
     # arrows to the two 3D outcomes
-    s += f'<line x1="260" y1="100" x2="330" y2="100" stroke="{INK}" stroke-width="1.5"/><text x="265" y="88" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">ABAB</text>'
-    s += f'<line x1="276" y1="230" x2="346" y2="230" stroke="{INK}" stroke-width="1.5"/><text x="281" y="218" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">ABC</text>'
+    s += f'<line x1="260" y1="100" x2="330" y2="100" stroke="{INK}" stroke-width="1.5"/><text x="265" y="88" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">ABAB</text>'
+    s += f'<line x1="276" y1="230" x2="346" y2="230" stroke="{INK}" stroke-width="1.5"/><text x="281" y="218" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">ABC</text>'
     # hexagonal prism (hcp)
     hx = [(400 + 55*dx, 100 + 55*dy) for dx, dy in [(1,0),(0.5,0.866),(-0.5,0.866),(-1,0),(-0.5,-0.866),(0.5,-0.866)]]
     pts = " ".join(f"{x:.0f},{y:.0f}" for x, y in hx)
     s += f'<polygon points="{pts}" fill="none" stroke="{INK}" stroke-width="2"/>'
-    s += f'<text x="400" y="190" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">hcp prism</text>'
+    s += f'<text x="400" y="190" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">hcp prism</text>'
     # cube (ccp)
     s += f'<rect x="560" y="180" width="90" height="90" fill="none" stroke="{BLUE}" stroke-width="2"/><polygon points="560,180 590,150 680,150 650,180" fill="none" stroke="{BLUE}" stroke-width="1.5"/><line x1="650" y1="180" x2="680" y2="150" stroke="{BLUE}" stroke-width="1.5"/><line x1="650" y1="270" x2="680" y2="240" stroke="{BLUE}" stroke-width="1.5"/><line x1="680" y1="150" x2="680" y2="240" stroke="{BLUE}" stroke-width="1.5"/>'
-    s += f'<text x="605" y="310" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">ccp cube</text></svg>'
+    s += f'<text x="605" y="310" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">ccp cube</text></svg>'
     return s
 
 def fig_voids():
@@ -113,10 +113,10 @@ def fig_voids():
     s+=f'<rect width="760" height="320" fill="{PAPER}"/>'
     # tetrahedral: 3 base + 1 top small
     for (x,y) in [(140,220),(220,220),(180,150)]: s+=f'<circle cx="{x}" cy="{y}" r="42" fill="none" stroke="{INK}" stroke-width="1.5"/>'
-    s+=f'<circle cx="180" cy="195" r="12" fill="{ACC}"/><text x="120" y="290" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Tetrahedral void: 4 spheres</text><text x="120" y="312" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">r(void) = 0.225 R, 2 per sphere</text>'
+    s+=f'<circle cx="180" cy="195" r="12" fill="{ACC}"/><text x="120" y="290" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Tetrahedral void: 4 spheres</text><text x="120" y="312" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">r(void) = 0.225 R, 2 per sphere</text>'
     # octahedral: three circles in a triangle, as the notes draw it
     for (x,y) in [(480,205),(600,205),(540,105)]: s+=f'<circle cx="{x}" cy="{y}" r="38" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<circle cx="540" cy="172" r="13" fill="{ACC}"/><text x="450" y="290" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Octahedral void: 6 spheres</text><text x="450" y="312" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">r(void) = 0.414 R, 1 per sphere</text></svg>'
+    s+=f'<circle cx="540" cy="172" r="13" fill="{ACC}"/><text x="450" y="290" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Octahedral void: 6 spheres</text><text x="450" y="312" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">r(void) = 0.414 R, 1 per sphere</text></svg>'
     return s
 
 def fig_radius():
@@ -130,12 +130,12 @@ def fig_radius():
     for a,b in zip(front, back): s+=f'<line x1="{a[0]}" y1="{a[1]}" x2="{b[0]}" y2="{b[1]}" stroke="{INK}" stroke-width="1.5"/>'
     # body diagonal, front bottom-left corner through the centre to the back top-right corner
     s+=f'<line x1="80" y1="260" x2="310" y2="45" stroke="{ACC}" stroke-width="2"/>'
-    for p in front+back: s+=f'<circle cx="{p[0]}" cy="{p[1]}" r="16" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<circle cx="195" cy="152" r="14" fill="{ACC}"/>'
-    s+=f'<text x="330" y="60" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Anion: corners</text><text x="330" y="88" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Cation: body centre</text>'
-    s+=f'<text x="330" y="130" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">sqrt(3) a = 2r+ + 2r-</text><text x="330" y="160" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">a = 2r-  (anions touch)</text><text x="330" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">r+/r- = sqrt(3) - 1 = 0.732</text><text x="330" y="230" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">NaCl (octahedral): 0.414</text><text x="330" y="260" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">ZnS (tetrahedral): 0.225</text>'
+    for p in front+back: s+=f'<circle cx="{p[0]}" cy="{p[1]}" r="16" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
+    s+=f'<circle cx="195" cy="152" r="14" fill="{BLUE}"/>'
+    s+=f'<text x="330" y="60" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Anion: corners</text><text x="330" y="88" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Cation: body centre</text>'
+    s+=f'<text x="330" y="130" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">sqrt(3) a = 2r+ + 2r-</text><text x="330" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">a = 2r-  (anions touch)</text><text x="330" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">r+/r- = sqrt(3) - 1 = 0.732</text><text x="330" y="230" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">NaCl (octahedral): 0.414</text><text x="330" y="260" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">ZnS (tetrahedral): 0.225</text>'
     # edge arrow a
-    s+=f'<line x1="80" y1="290" x2="250" y2="290" stroke="{INK}" stroke-width="1.5"/><line x1="80" y1="284" x2="80" y2="296" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="284" x2="250" y2="296" stroke="{INK}" stroke-width="1.5"/><text x="155" y="310" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">a = edge of the cube</text></svg>'
+    s+=f'<line x1="80" y1="290" x2="250" y2="290" stroke="{INK}" stroke-width="1.5"/><line x1="80" y1="284" x2="80" y2="296" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="284" x2="250" y2="296" stroke="{INK}" stroke-width="1.5"/><text x="155" y="310" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">a = edge of the cube</text></svg>'
     return s
 
 def fig_perovskite():
@@ -147,9 +147,9 @@ def fig_perovskite():
     for (x,y) in [(200,160),(270,120),(235,30),(235,250),(125,140),(345,140)]:
         s+=f'<line x1="235" y1="140" x2="{x}" y2="{y}" stroke="{BLUE}" stroke-width="1.5"/>'
     for (x,y) in [(90,50),(310,50),(90,270),(310,270),(160,10),(380,10),(160,230),(380,230)]: s+=f'<circle cx="{x}" cy="{y}" r="12" fill="{BLUE}"/>'
-    for (x,y) in [(200,160),(270,120),(235,30),(235,250),(125,140),(345,140)]: s+=f'<circle cx="{x}" cy="{y}" r="11" fill="none" stroke="{INK}" stroke-width="1.5"/>'
+    for (x,y) in [(200,160),(270,120),(235,30),(235,250),(125,140),(345,140)]: s+=f'<circle cx="{x}" cy="{y}" r="11" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
     s+=f'<circle cx="235" cy="140" r="12" fill="{ACC}"/>'
-    s+=f'<text x="450" y="80" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">Ca2+ corners: 8 x 1/8 = 1</text><text x="450" y="110" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">O2- face centres: 6 x 1/2 = 3</text><text x="450" y="140" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">Ti4+ body centre: 1</text><text x="450" y="180" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Formula: CaTiO3</text><text x="450" y="210" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Ti CN 6, Ca CN 12</text><text x="450" y="250" font-family="Radio Canada, sans-serif" font-size="14" fill="{MUT}">Shift origin by (1/2,1/2,1/2):</text><text x="450" y="275" font-family="Radio Canada, sans-serif" font-size="14" fill="{MUT}">Ca at centre, Ti at corners, O on edges.</text></svg>'
+    s+=f'<text x="450" y="80" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Ca2+ corners: 8 x 1/8 = 1</text><text x="450" y="110" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">O2- face centres: 6 x 1/2 = 3</text><text x="450" y="140" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">Ti4+ body centre: 1</text><text x="450" y="180" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Formula: CaTiO3</text><text x="450" y="210" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Ti CN 6, Ca CN 12</text><text x="450" y="250" font-family="Source Sans 3, sans-serif" font-size="14" fill="{MUT}">Shift origin by (1/2,1/2,1/2):</text><text x="450" y="275" font-family="Source Sans 3, sans-serif" font-size="14" fill="{MUT}">Ca at centre, Ti at corners, O on edges.</text></svg>'
     return s
 
 def fig_tolerance():
@@ -159,10 +159,10 @@ def fig_tolerance():
     def X(tt): return 70+(tt-0.6)/0.6*630
     for (x0,x1,lab) in [(70,X(0.71),"ilmenite / other"),(X(0.71),X(0.90),"orthorhombic / rhombohedral"),(X(0.90),X(1.0),"cubic"),(X(1.0),700,"hexagonal / tetragonal")]:
         s+=f'<rect x="{x0:.0f}" y="120" width="{x1-x0:.0f}" height="130" fill="{PAPER}" stroke="{MUT}" stroke-width="1"/>'
-        s+=f'<text x="{(x0+x1)/2:.0f}" y="190" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{lab}</text>'
+        s+=f'<text x="{(x0+x1)/2:.0f}" y="190" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{lab}</text>'
     for tt in [0.71,0.90,1.0]:
-        s+=f'<line x1="{X(tt):.0f}" y1="250" x2="{X(tt):.0f}" y2="260" stroke="{INK}" stroke-width="2"/><text x="{X(tt):.0f}" y="280" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{tt}</text>'
-    s+=f'<circle cx="{X(1.0):.0f}" cy="90" r="6" fill="{ACC}"/><text x="{X(1.0):.0f}" y="70" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{ACC}">t = 1 ideal, SrTiO3</text><text x="70" y="40" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Goldschmidt tolerance factor t, increasing to the right</text></svg>'
+        s+=f'<line x1="{X(tt):.0f}" y1="250" x2="{X(tt):.0f}" y2="260" stroke="{INK}" stroke-width="2"/><text x="{X(tt):.0f}" y="280" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">{tt}</text>'
+    s+=f'<circle cx="{X(1.0):.0f}" cy="90" r="6" fill="{ACC}"/><text x="{X(1.0):.0f}" y="70" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{ACC}">t = 1 ideal, SrTiO3</text><text x="70" y="40" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Goldschmidt tolerance factor t, increasing to the right</text></svg>'
     return s
 
 def fig_cfse():
@@ -171,35 +171,35 @@ def fig_cfse():
     d_o = 'Δ<tspan baseline-shift="sub" font-size="11">o</tspan>'
     d_t = 'Δ<tspan baseline-shift="sub" font-size="11">t</tspan>'
     # octahedral levels
-    s+=f'<text x="60" y="36" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Octahedral</text>'
+    s+=f'<text x="60" y="36" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Octahedral</text>'
     s+=f'<line class="anim-line" x1="60" y1="80" x2="220" y2="80" stroke="{ACC}" stroke-width="3"/><line class="anim-line" style="animation-delay:150ms" x1="60" y1="170" x2="220" y2="170" stroke="{ACC}" stroke-width="3"/>'
-    s+=f'<text x="235" y="85" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">e<tspan baseline-shift="sub" font-size="11">g</tspan> (+0.6 {d_o})</text>'
-    s+=f'<text x="235" y="175" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">t<tspan baseline-shift="sub" font-size="11">2g</tspan> (-0.4 {d_o})</text>'
-    s+=f'<line x1="330" y1="80" x2="330" y2="170" stroke="{INK}" stroke-width="1.5"/><line x1="324" y1="80" x2="330" y2="80" stroke="{INK}" stroke-width="1.5"/><line x1="324" y1="170" x2="330" y2="170" stroke="{INK}" stroke-width="1.5"/><text x="342" y="130" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{d_o}</text>'
-    s+=f'<text x="60" y="235" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">d<tspan baseline-shift="super" font-size="11">3</tspan>: t<tspan baseline-shift="sub" font-size="11">2g</tspan><tspan baseline-shift="super" font-size="11">3</tspan>, CFSE = 1.2 {d_o}</text>'
-    s+=f'<text x="60" y="262" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">d<tspan baseline-shift="super" font-size="11">5</tspan> high spin: CFSE = 0</text>'
+    s+=f'<text x="235" y="85" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">e<tspan baseline-shift="sub" font-size="11">g</tspan> (+0.6 {d_o})</text>'
+    s+=f'<text x="235" y="175" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">t<tspan baseline-shift="sub" font-size="11">2g</tspan> (-0.4 {d_o})</text>'
+    s+=f'<line x1="330" y1="80" x2="330" y2="170" stroke="{INK}" stroke-width="1.5"/><line x1="324" y1="80" x2="330" y2="80" stroke="{INK}" stroke-width="1.5"/><line x1="324" y1="170" x2="330" y2="170" stroke="{INK}" stroke-width="1.5"/><text x="342" y="130" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">{d_o}</text>'
+    s+=f'<text x="60" y="235" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">d<tspan baseline-shift="super" font-size="11">3</tspan>: t<tspan baseline-shift="sub" font-size="11">2g</tspan><tspan baseline-shift="super" font-size="11">3</tspan>, CFSE = 1.2 {d_o}</text>'
+    s+=f'<text x="60" y="262" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">d<tspan baseline-shift="super" font-size="11">5</tspan> high spin: CFSE = 0</text>'
     # tetrahedral levels (inverted, smaller gap)
-    s+=f'<text x="460" y="36" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Tetrahedral</text>'
+    s+=f'<text x="460" y="36" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Tetrahedral</text>'
     s+=f'<line class="anim-line" style="animation-delay:300ms" x1="460" y1="100" x2="620" y2="100" stroke="{BLUE}" stroke-width="3"/><line class="anim-line" style="animation-delay:450ms" x1="460" y1="150" x2="620" y2="150" stroke="{BLUE}" stroke-width="3"/>'
-    s+=f'<text x="460" y="88" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">t<tspan baseline-shift="sub" font-size="10">2</tspan> (+0.4 {d_t})</text>'
-    s+=f'<text x="460" y="178" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">e (-0.6 {d_t})</text>'
-    s+=f'<line x1="660" y1="100" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="100" x2="660" y2="100" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="150" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><text x="672" y="130" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{d_t}</text>'
-    s+=f'<text x="460" y="235" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{d_t} = 4/9 {d_o}</text>'
-    s+=f'<text x="460" y="262" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Splitting is inverted and smaller</text></svg>'
+    s+=f'<text x="460" y="88" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">t<tspan baseline-shift="sub" font-size="10">2</tspan> (+0.4 {d_t})</text>'
+    s+=f'<text x="460" y="178" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">e (-0.6 {d_t})</text>'
+    s+=f'<line x1="660" y1="100" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="100" x2="660" y2="100" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="150" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><text x="672" y="130" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">{d_t}</text>'
+    s+=f'<text x="460" y="235" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">{d_t} = 4/9 {d_o}</text>'
+    s+=f'<text x="460" y="262" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Splitting is inverted and smaller</text></svg>'
     return s
 
 def fig_spinel():
     s=svg_open(760,290)
     s+=f'<rect width="760" height="290" fill="{PAPER}"/>'
     sub = lambda x: f'<tspan baseline-shift="sub" font-size="11">{x}</tspan>'
-    s+=f'<text x="60" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Normal spinel (A){sub("tet")}(B){sub("2oct")}O{sub("4")}</text>'
-    for (x,y,lab) in [(120,120,"A2+"),(200,120,"B3+"),(280,120,"B3+")]: s+=f'<circle cx="{x}" cy="{y}" r="26" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="12" fill="{INK}">{lab}</text>'
-    s+=f'<text x="60" y="180" font-family="Radio Canada, sans-serif" font-size="13" fill="{MUT}">Td hole (1/8 filled) - Oct holes (1/2 filled)</text><text x="60" y="210" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">MgAl{sub("2")}O{sub("4")}, ZnFe{sub("2")}O{sub("4")}, Mn{sub("3")}O{sub("4")}</text>'
-    s+=f'<text x="420" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Inverse spinel B(AB)O{sub("4")}</text>'
+    s+=f'<text x="60" y="40" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Normal spinel (A){sub("tet")}(B){sub("2oct")}O{sub("4")}</text>'
+    for (x,y,lab) in [(120,120,"A2+"),(200,120,"B3+"),(280,120,"B3+")]: s+=f'<circle cx="{x}" cy="{y}" r="26" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{lab}</text>'
+    s+=f'<text x="60" y="180" font-family="Source Sans 3, sans-serif" font-size="13" fill="{MUT}">Td hole (1/8 filled) - Oct holes (1/2 filled)</text><text x="60" y="210" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">MgAl{sub("2")}O{sub("4")}, ZnFe{sub("2")}O{sub("4")}, Mn{sub("3")}O{sub("4")}</text>'
+    s+=f'<text x="420" y="40" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Inverse spinel B(AB)O{sub("4")}</text>'
     for (x,y,lab) in [(480,120,"B3+"),(560,120,"A2+"),(640,120,"B3+")]:
         cls = ' class="anim-pulse"' if lab == "A2+" else ""
-        s+=f'<circle{cls} cx="{x}" cy="{y}" r="26" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="12" fill="{INK}">{lab}</text>'
-    s+=f'<text x="420" y="180" font-family="Radio Canada, sans-serif" font-size="13" fill="{MUT}">Td: B3+ - Oct: A2+ + B3+</text><text x="420" y="210" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">Fe{sub("3")}O{sub("4")}, CoFe{sub("2")}O{sub("4")}, NiFe{sub("2")}O{sub("4")}</text><text x="420" y="232" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">CuFe{sub("2")}O{sub("4")}</text><text x="60" y="262" font-family="Radio Canada, sans-serif" font-size="14" fill="{ACC}">O2- forms a ccp / fcc array in both cases.</text></svg>'
+        s+=f'<circle{cls} cx="{x}" cy="{y}" r="26" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{lab}</text>'
+    s+=f'<text x="420" y="180" font-family="Source Sans 3, sans-serif" font-size="13" fill="{MUT}">Td: B3+ - Oct: A2+ + B3+</text><text x="420" y="210" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">Fe{sub("3")}O{sub("4")}, CoFe{sub("2")}O{sub("4")}, NiFe{sub("2")}O{sub("4")}</text><text x="420" y="232" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">CuFe{sub("2")}O{sub("4")}</text><text x="60" y="262" font-family="Source Sans 3, sans-serif" font-size="14" fill="{ACC}">O2- forms a ccp / fcc array in both cases.</text></svg>'
     return s
 
 def fig_defects():
@@ -209,19 +209,19 @@ def fig_defects():
     for r in range(3):
         for c in range(4):
             if (r,c) in [(1,1),(1,2)]: continue
-            col = BLUE if (r+c) % 2 == 0 else INK
+            col = BLUE if (r+c) % 2 == 0 else ACC
             s+=f'<circle cx="{70+c*52}" cy="{60+r*52}" r="16" fill="none" stroke="{col}" stroke-width="1.5"/>'
     s+=f'<rect x="105" y="95" width="32" height="32" fill="none" stroke="{ACC}" stroke-width="2" stroke-dasharray="4 3"/><rect x="157" y="95" width="32" height="32" fill="none" stroke="{ACC}" stroke-width="2" stroke-dasharray="4 3"/>'
-    s+=f'<text x="60" y="215" font-family="Radio Canada, sans-serif" font-size="13" fill="{BLUE}">cation vacancy</text><text x="180" y="215" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">anion vacancy</text>'
-    s+=f'<text x="60" y="250" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Schottky: paired cation + anion</text><text x="60" y="275" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">vacancies, stoichiometry kept</text>'
+    s+=f'<text x="60" y="215" font-family="Source Sans 3, sans-serif" font-size="13" fill="{BLUE}">cation vacancy</text><text x="180" y="215" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">anion vacancy</text>'
+    s+=f'<text x="60" y="250" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Schottky: paired cation + anion</text><text x="60" y="275" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">vacancies, stoichiometry kept</text>'
     # Frenkel: one lattice site empty (vacancy), the ion in a gap between sites
     for r in range(3):
         for c in range(4):
             if (r,c) == (1,1): continue
             s+=f'<circle cx="{430+c*52}" cy="{60+r*52}" r="16" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
     s+=f'<rect x="465" y="95" width="32" height="32" fill="none" stroke="{ACC}" stroke-width="2" stroke-dasharray="4 3"/><circle cx="516" cy="84" r="9" fill="{ACC}"/>'
-    s+=f'<text x="420" y="215" font-family="Radio Canada, sans-serif" font-size="13" fill="{ACC}">ion in an interstitial gap</text>'
-    s+=f'<text x="420" y="250" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Frenkel: ion leaves its site for</text><text x="420" y="275" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">an interstitial site, vacancy left</text></svg>'
+    s+=f'<text x="420" y="215" font-family="Source Sans 3, sans-serif" font-size="13" fill="{ACC}">ion in an interstitial gap</text>'
+    s+=f'<text x="420" y="250" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Frenkel: ion leaves its site for</text><text x="420" y="275" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">an interstitial site, vacancy left</text></svg>'
     return s
 
 
@@ -240,9 +240,9 @@ def fig_lattice():
             colr = ACC if hl else INK
             s+=f'<polygon points="{poly(front)}" fill="none" stroke="{colr}" stroke-width="{wdt}"/><polygon points="{poly(back)}" fill="none" stroke="{colr}" stroke-width="{wdt}"/>'
             for a,b in zip(front, back): s+=f'<line x1="{a[0]}" y1="{a[1]}" x2="{b[0]}" y2="{b[1]}" stroke="{colr}" stroke-width="{wdt}"/>'
-    s+=f'<text x="125" y="235" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">a</text><text x="172" y="180" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">b</text><text x="72" y="180" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">c</text>'
-    s+=f'<text x="90" y="275" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">a: bottom edge, b: side edge, c: left edge of the unit cell</text>'
-    s+=f'<text x="90" y="14" font-family="Radio Canada, sans-serif" font-size="14" fill="{ACC}">one unit cell, highlighted</text></svg>'
+    s+=f'<text x="125" y="235" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">a</text><text x="172" y="180" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">b</text><text x="72" y="180" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">c</text>'
+    s+=f'<text x="90" y="275" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">a: bottom edge, b: side edge, c: left edge of the unit cell</text>'
+    s+=f'<text x="90" y="14" font-family="Source Sans 3, sans-serif" font-size="14" fill="{ACC}">one unit cell, highlighted</text></svg>'
     return s
 
 def fig_nacl_oct():
@@ -251,10 +251,10 @@ def fig_nacl_oct():
     cx, cy = 220, 150
     for (x,y) in [(cx,60),(cx,240),(130,150),(310,150)]:
         s+=f'<line x1="{cx}" y1="{cy}" x2="{x}" y2="{y}" stroke="{INK}" stroke-width="1.5"/>'
-        s+=f'<circle cx="{x}" cy="{y}" r="20" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<circle cx="{cx+55}" cy="{cy-45}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/><circle cx="{cx-55}" cy="{cy+45}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<circle cx="{cx}" cy="{cy}" r="12" fill="{ACC}"/>'
-    s+=f'<text x="400" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">Cl- at the six corners of an octahedron</text><text x="400" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">Na+ at the centre</text><text x="400" y="160" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Na+ is octahedrally surrounded</text><text x="400" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">by six Cl- ions: coordination 6:6</text></svg>'
+        s+=f'<circle cx="{x}" cy="{y}" r="20" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
+    s+=f'<circle cx="{cx+55}" cy="{cy-45}" r="14" fill="none" stroke="{ACC}" stroke-width="1.5"/><circle cx="{cx-55}" cy="{cy+45}" r="14" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
+    s+=f'<circle cx="{cx}" cy="{cy}" r="12" fill="{BLUE}"/>'
+    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Cl- at the six corners of an octahedron</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">Na+ at the centre</text><text x="400" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Na+ is octahedrally surrounded</text><text x="400" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">by six Cl- ions: coordination 6:6</text></svg>'
     return s
 
 def fig_wurtzite():
@@ -266,9 +266,9 @@ def fig_wurtzite():
     poly=lambda pts: " ".join(f"{x:.0f},{y:.0f}" for x,y in pts)
     s+=f'<polygon points="{poly(top)}" fill="none" stroke="{INK}" stroke-width="2"/><polygon points="{poly(bot)}" fill="none" stroke="{INK}" stroke-width="2"/>'
     for a,b in zip(top, bot): s+=f'<line x1="{a[0]:.0f}" y1="{a[1]:.0f}" x2="{b[0]:.0f}" y2="{b[1]:.0f}" stroke="{INK}" stroke-width="1.5"/>'
-    for (x,y) in top+bot: s+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="10" fill="{BLUE}"/>'
+    for (x,y) in top+bot: s+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="10" fill="#FFEDD5" stroke="{ACC}" stroke-width="1.5"/>'
     s+=f'<circle cx="250" cy="168" r="10" fill="{ACC}"/>'
-    s+=f'<text x="400" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Wurtzite, ZnS: hexagonal prism</text><text x="400" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">S2- in an hcp array</text><text x="400" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">Zn2+ in half the tetrahedral holes</text><text x="400" y="180" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Coordination 4:4, as in zinc blende</text></svg>'
+    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Wurtzite, ZnS: hexagonal prism</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">S2- in an hcp array</text><text x="400" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">Zn2+ in half the tetrahedral holes</text><text x="400" y="180" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Coordination 4:4, as in zinc blende</text></svg>'
     return s
 
 def fig_fluorite():
@@ -279,7 +279,7 @@ def fig_fluorite():
     s+=f'<line x1="90" y1="50" x2="140" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="50" x2="340" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="250" x2="340" y2="220" stroke="{INK}" stroke-width="1.5"/><line x1="140" y1="20" x2="340" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="340" y1="20" x2="340" y2="220" stroke="{INK}" stroke-width="1.5"/>'
     for (x,y) in [(90,50),(290,50),(90,250),(290,250),(190,150),(215,35),(315,135),(140,20),(340,20),(340,220)]: s+=f'<circle cx="{x}" cy="{y}" r="11" fill="{BLUE}"/>'
     for (x,y) in [(140,100),(240,100),(140,200),(240,200)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{ACC}"/>'
-    s+=f'<text x="400" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">Ca2+: corners and face centres</text><text x="400" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">F-: centres of the eight small cubes</text><text x="400" y="160" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Ca2+ coordinated by 8 F-</text><text x="400" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">F- coordinated by 4 Ca2+: 8:4</text></svg>'
+    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Ca2+: corners and face centres</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">F-: centres of the eight small cubes</text><text x="400" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Ca2+ coordinated by 8 F-</text><text x="400" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">F- coordinated by 4 Ca2+: 8:4</text></svg>'
     return s
 
 def fig_rutile():
@@ -289,7 +289,7 @@ def fig_rutile():
     s+=f'<rect x="120" y="50" width="130" height="200" fill="none" stroke="{INK}" stroke-width="2"/><line x1="120" y1="50" x2="160" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="50" x2="290" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="250" x2="290" y2="225" stroke="{INK}" stroke-width="1.5"/><line x1="160" y1="25" x2="290" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="25" x2="290" y2="225" stroke="{INK}" stroke-width="1.5"/>'
     for (x,y) in [(120,50),(250,50),(120,250),(250,250),(160,25),(290,25),(160,225),(290,225)]: s+=f'<circle cx="{x}" cy="{y}" r="10" fill="{BLUE}"/>'
     s+=f'<circle cx="185" cy="150" r="10" fill="{BLUE}"/><circle cx="150" cy="110" r="8" fill="{ACC}"/><circle cx="225" cy="190" r="8" fill="{ACC}"/>'
-    s+=f'<text x="360" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Rutile, TiO2: tetragonal cell</text><text x="360" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">Ti4+: corners and body centre</text><text x="360" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">O2-: inside the cell</text><text x="360" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Ti octahedral (6), O trigonal (3)</text><text x="360" y="220" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">One side longer: body-centred</text><text x="360" y="250" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">tetragonal, not cubic</text></svg>'
+    s+=f'<text x="360" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Rutile, TiO2: tetragonal cell</text><text x="360" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Ti4+: corners and body centre</text><text x="360" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">O2-: inside the cell</text><text x="360" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Ti octahedral (6), O trigonal (3)</text><text x="360" y="220" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">One side longer: body-centred</text><text x="360" y="250" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">tetragonal, not cubic</text></svg>'
     return s
 
 def fig_diamond():
@@ -303,7 +303,7 @@ def fig_diamond():
     for p in front+back: s+=f'<circle cx="{p[0]}" cy="{p[1]}" r="9" fill="{INK}"/>'
     for (x,y) in [(180,150),(210,30),(310,130)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{BLUE}"/>'
     for (x,y) in [(220,170),(250,100),(130,200),(230,210)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{ACC}"/>'
-    s+=f'<text x="400" y="90" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Diamond cubic: an fcc lattice</text><text x="400" y="120" font-family="Radio Canada, sans-serif" font-size="15" fill="{ACC}">4 more atoms inside the cell</text><text x="400" y="150" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">at 4 of the 8 tetrahedral holes</text><text x="400" y="190" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">8 atoms per cell, CN 4, 34% filled</text></svg>'
+    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Diamond cubic: an fcc lattice</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">4 more atoms inside the cell</text><text x="400" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">at 4 of the 8 tetrahedral holes</text><text x="400" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">8 atoms per cell, CN 4, 34% filled</text></svg>'
     return s
 
 def fig_bcc_layers():
@@ -311,11 +311,11 @@ def fig_bcc_layers():
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     for r in range(4):
         for c in range(4): s+=f'<circle cx="{70+c*32}" cy="{60+r*32}" r="14" fill="none" stroke="{INK}" stroke-width="1.5"/>'
-    s+=f'<text x="60" y="230" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">First layer: square packing</text>'
+    s+=f'<text x="60" y="230" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">First layer: square packing</text>'
     s+=f'<line x1="60" y1="50" x2="180" y2="170" stroke="{ACC}" stroke-width="1.5"/>'
     for r in range(4):
         for c in range(4): s+=f'<circle cx="{430+16+c*32}" cy="{76+r*32}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<text x="420" y="230" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Second layer sits in the notches</text></svg>'
+    s+=f'<text x="420" y="230" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Second layer sits in the notches</text></svg>'
     return s
 
 def fig_hcp_prism():
@@ -327,26 +327,26 @@ def fig_hcp_prism():
     poly=lambda pts: " ".join(f"{x:.0f},{y:.0f}" for x,y in pts)
     s+=f'<polygon points="{poly(top)}" fill="none" stroke="{INK}" stroke-width="2"/><polygon points="{poly(bot)}" fill="none" stroke="{INK}" stroke-width="2"/>'
     for a,b in zip(top, bot): s+=f'<line x1="{a[0]:.0f}" y1="{a[1]:.0f}" x2="{b[0]:.0f}" y2="{b[1]:.0f}" stroke="{INK}" stroke-width="1.5"/>'
-    s+=f'<text x="400" y="70" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">A: third layer, top</text><text x="400" y="160" font-family="Radio Canada, sans-serif" font-size="15" fill="{BLUE}">B: second layer, middle</text><text x="400" y="250" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">A: first layer, bottom</text>'
-    s+=f'<line x1="150" y1="30" x2="290" y2="30" stroke="{INK}" stroke-width="1.5"/><line x1="150" y1="24" x2="150" y2="36" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="24" x2="290" y2="36" stroke="{INK}" stroke-width="1.5"/><text x="205" y="20" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">a</text>'
-    s+=f'<line x1="60" y1="90" x2="60" y2="230" stroke="{INK}" stroke-width="1.5"/><line x1="54" y1="90" x2="66" y2="90" stroke="{INK}" stroke-width="1.5"/><line x1="54" y1="230" x2="66" y2="230" stroke="{INK}" stroke-width="1.5"/><text x="45" y="165" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">c</text>'
+    s+=f'<text x="400" y="70" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">A: third layer, top</text><text x="400" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">B: second layer, middle</text><text x="400" y="250" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">A: first layer, bottom</text>'
+    s+=f'<line x1="150" y1="30" x2="290" y2="30" stroke="{INK}" stroke-width="1.5"/><line x1="150" y1="24" x2="150" y2="36" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="24" x2="290" y2="36" stroke="{INK}" stroke-width="1.5"/><text x="205" y="20" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">a</text>'
+    s+=f'<line x1="60" y1="90" x2="60" y2="230" stroke="{INK}" stroke-width="1.5"/><line x1="54" y1="90" x2="66" y2="90" stroke="{INK}" stroke-width="1.5"/><line x1="54" y1="230" x2="66" y2="230" stroke="{INK}" stroke-width="1.5"/><text x="45" y="165" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">c</text>'
     for (x,y) in [(480,300),(520,300),(500,265)]: s+=f'<circle cx="{x}" cy="{y}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<text x="560" y="305" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">B: three spheres, a triangle</text></svg>'
+    s+=f'<text x="560" y="305" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">B: three spheres, a triangle</text></svg>'
     return s
 
 def fig_ccp12():
     s=svg_open(760,430)
     s+=f'<rect width="760" height="430" fill="{PAPER}"/>'
     for (x,y,n) in [(352,52,"7"),(408,52,"8"),(380,98,"9")]:
-        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{n}</text>'
-    s+=f'<text x="450" y="75" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">A layer, above</text>'
+        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{n}</text>'
+    s+=f'<text x="450" y="75" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">A layer, above</text>'
     for i,(x,y) in enumerate([(380,178),(434,209),(434,271),(380,302),(326,271),(326,209)]):
-        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{i+1}</text>'
-    s+=f'<text x="380" y="245" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="16" fill="{ACC}">★</text>'
-    s+=f'<text x="470" y="245" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">B layer: six around the centre</text>'
+        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{i+1}</text>'
+    s+=f'<text x="380" y="245" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="16" fill="{ACC}">★</text>'
+    s+=f'<text x="470" y="245" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">B layer: six around the centre</text>'
     for (x,y,n) in [(352,372,"10"),(408,372,"11"),(380,410,"12")]:
-        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">{n}</text>'
-    s+=f'<text x="450" y="380" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">C layer, below</text></svg>'
+        s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{n}</text>'
+    s+=f'<text x="450" y="380" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">C layer, below</text></svg>'
     return s
 
 # ---- template ----
@@ -357,12 +357,12 @@ def page(rel, title, lede, body, crumb=""):
         front=[(x0,160),(x0+80,160),(x0+80,80),(x0,80)]
         back=[(a+20,b-20) for a,b in front]
         poly=lambda pts: " ".join(f"{a},{b}" for a,b in pts)
-        g=f'<g class="cube"><path d="M{x0} 160 L{x0} 80 L{x0+80} 80 L{x0+80} 160 Z M{x0+20} 140 L{x0+20} 60 L{x0+100} 60 L{x0+100} 140 Z M{x0} 80 L{x0+20} 60 M{x0+80} 80 L{x0+100} 60 M{x0+80} 160 L{x0+100} 140 M{x0} 160 L{x0+20} 140" fill="none" stroke="#f4f3ee" stroke-width="2"/>'
-        for (x,y) in front+back: g+=f'<circle cx="{x}" cy="{y}" r="7" fill="#f4f3ee"/>'
-        if kind=="bcc": g+=f'<circle cx="{x0+50}" cy="{110}" r="7" fill="#f4f3ee"/>'
+        g=f'<g class="cube"><path d="M{x0} 160 L{x0} 80 L{x0+80} 80 L{x0+80} 160 Z M{x0+20} 140 L{x0+20} 60 L{x0+100} 60 L{x0+100} 140 Z M{x0} 80 L{x0+20} 60 M{x0+80} 80 L{x0+100} 60 M{x0+80} 160 L{x0+100} 140 M{x0} 160 L{x0+20} 140" fill="none" stroke="#FAF7F1" stroke-width="2"/>'
+        for (x,y) in front+back: g+=f'<circle cx="{x}" cy="{y}" r="7" fill="#FAF7F1"/>'
+        if kind=="bcc": g+=f'<circle cx="{x0+50}" cy="{110}" r="7" fill="#FAF7F1"/>'
         if kind=="fcc":
-            g+=f'<circle cx="{x0+40}" cy="{120}" r="7" fill="#f4f3ee"/><circle cx="{x0+50}" cy="{70}" r="7" fill="#f4f3ee"/><circle cx="{x0+90}" cy="{110}" r="7" fill="#f4f3ee"/>'
-        g+=f'<text x="{x0}" y="200" fill="#f4f3ee" font-family="Radio Canada, sans-serif" font-size="15">{label}</text></g>'
+            g+=f'<circle cx="{x0+40}" cy="{120}" r="7" fill="#FAF7F1"/><circle cx="{x0+50}" cy="{70}" r="7" fill="#FAF7F1"/><circle cx="{x0+90}" cy="{110}" r="7" fill="#FAF7F1"/>'
+        g+=f'<text x="{x0}" y="200" fill="#FAF7F1" font-family="Source Sans 3, sans-serif" font-size="15">{label}</text></g>'
         return g
     field = '<figure class="field hero-field"><svg viewBox="0 0 720 220" role="img" aria-label="Simple cubic, body-centred cubic and face-centred cubic unit cells">' + hero_cube(40, "Simple cubic", "sc") + hero_cube(280, "Body-centred cubic", "bcc") + hero_cube(520, "Face-centred cubic", "fcc") + '</svg></figure>'
     prefix = "../" * depth if depth else ""
@@ -376,13 +376,13 @@ def page(rel, title, lede, body, crumb=""):
 <meta name="description" content="{lede}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;700&family=Radio+Canada:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{prefix}assets/style.css">
 </head>
 <body class="{cls}">
 <header class="topbar"><div class="container">
 <a class="wordmark" href="{prefix}index.html"><span>Inorganic</span><span>VII</span></a>
-<nav aria-label="Main"><a href="{prefix}index.html">Chapters</a><a href="{prefix}chapters/01-solid-state/index.html">Solid state</a><a href="{prefix}sources.html">Sources and checks</a></nav>
+<nav aria-label="Main"><a href="{prefix}index.html">Chapters</a><button type="button" class="search-btn" id="search-btn" aria-expanded="false">Search</button><a href="{prefix}chapters/04-solids/index.html">Chapter 4 · Solids</a><a href="{prefix}sources.html">Sources and checks</a></nav>
 </div></header>
 <main class="container">
 <p class="crumb">{crumb}</p>
@@ -395,6 +395,11 @@ def page(rel, title, lede, body, crumb=""):
 <p><a href="{prefix}index.html">All chapters</a></p><p><a href="{prefix}sources.html">Sources and checks</a></p>
 <p><button type="button" class="motion-toggle" onclick="document.body.classList.toggle('no-motion');this.textContent=document.body.classList.contains('no-motion')?'Resume motion':'Pause motion'">Pause motion</button></p>
 </div></footer>
+<div class="search-panel" id="search-panel" data-index="{prefix}assets/search.json" hidden>
+<div class="search-box"><input type="search" id="search-input" placeholder="Search the notes..." aria-label="Search the notes"><button type="button" id="search-close">Close</button></div>
+<ol id="search-results"></ol>
+</div>
+<script src="{prefix}assets/search.js" defer></script>
 </body>
 </html>
 """
@@ -656,45 +661,110 @@ TOPICS = [
  ("14-spinel-cfse", "Normal and inverse spinel: CFSE", B14),
 ]
 
-def main():
-    # chapter 1 index
-    items = "".join(f'<li><a href="{slug}.html">{title}</a></li>' for slug, title, _ in TOPICS)
-    ch1_body = f"""
-<p class="lead">From the 23-page handwritten PDF: solid state, from crystalline and amorphous solids through close packing, ionic structures, defects, perovskite and spinel. Fourteen topic pages, in the order the notes take them.</p>
-<ol class="topic-list">{items}</ol>
-<p><a class="btn btn-primary" href="01-crystalline-amorphous.html">Start at the first topic</a></p>
+# ---- Chapter 4 sections: the 14 topics grouped into 6 pages, so the chapter is easy to move through ----
+COMING = """
+<p class="lead">These parts of the Chapter 4 syllabus are not in the 23 handwritten pages uploaded so far. Upload the pages that cover them and they will be added here, in the same format as the rest of the chapter.</p>
+<h2>Types of bonding, lattice energy</h2>
+<ul><li>Types of bonding in solids: ionic, covalent, metallic, molecular and hydrogen-bonded solids</li><li>Lattice energy, Born-Haber cycle, Madelung constant</li><li>Crystal field considerations in solids, structure-property correlations</li></ul>
+<h2>Silicates</h2>
+<ul><li>Classification based on SiO<sub>4</sub> tetrahedral linkage</li><li>Single chain silicates (pyroxenes), double chain silicates (amphiboles)</li><li>Sheet silicates (talc, mica, clay minerals)</li><li>Three-dimensional framework silicates (zeolites)</li><li>Isomorphous substitution, ion exchange properties, structural chemistry and industrial applications</li></ul>
+<h2>More defects</h2>
+<ul><li>Line defects and dislocations, surface defects and grain boundaries</li><li>Non-stoichiometric compounds, metal excess and metal deficiency defects</li><li>Defect equilibria, defect chemistry and its influence on electrical and optical properties</li></ul>
+<h2>Band theory and semiconductors</h2>
+<ul><li>Free electron theory, band theory of solids</li><li>Conductors, insulators and semiconductors</li><li>Intrinsic and extrinsic semiconductors; n-type and p-type semiconductors (the notes only ask about n-type and p-type in a margin question, the topic itself is not taught there)</li></ul>
+<h2>Superconductivity and magnetism</h2>
+<ul><li>Superconductivity, critical temperature, Meissner effect, type I and type II superconductors</li><li>Diamagnetism, paramagnetism, ferromagnetism, antiferromagnetism, ferrimagnetism</li><li>Cooperative magnetism and magnetic domains</li></ul>
+<h2>Polarization and liquid crystals</h2>
+<ul><li>Polarization mechanisms in solids, ferroelectricity, antiferroelectricity, pyroelectricity, piezoelectricity, dielectric properties</li><li>Liquid crystals (nematic, smectic, cholesteric phases), order parameter and phase transitions</li><li>Structure-property relationships and technological applications</li></ul>
 """
-    write("chapters/01-solid-state/index.html", page("chapters/01-solid-state/index.html", "Solid state and crystal structures", "Fourteen topics, transcribed from your 23-page notes and checked against standard sources.", ch1_body, '<a href="../../index.html">Chapters</a> / Chapter 1'))
-    # topic pages
-    for i, (slug, title, body) in enumerate(TOPICS):
-        prev = (TOPICS[i-1][0]+".html", TOPICS[i-1][1]) if i>0 else ("index.html", "Chapter 1")
-        nxt = (TOPICS[i+1][0]+".html", TOPICS[i+1][1]) if i < len(TOPICS)-1 else (None, None)
-        nxt = nxt if nxt[0] else None
-        topic_page(f"chapters/01-solid-state/{slug}.html", title, "Chapter 1 · Solid state and crystal structures", body, f'<a href="../../index.html">Chapters</a> / <a href="index.html">Chapter 1 · Solid state</a> / Topic {i+1} of {len(TOPICS)}', prev, nxt)
-    # planned chapters
-    planned = [
-        ("02-crystal-field-theory", "Crystal field theory in depth", "Splitting in octahedral, tetrahedral and square-planar fields, spectrochemical series, high and low spin, CFSE calculations, Jahn-Teller distortion, magnetic moments."),
-        ("03-coordination-compounds", "Coordination compounds", "Nomenclature, isomerism, Werner theory, chelate effect, stability constants, substitution mechanisms."),
-        ("04-organometallic-catalysis", "Organometallic chemistry and catalysis", "18-electron rule, metal carbonyls, oxidative addition and reductive elimination, homogeneous catalysis."),
-        ("05-bioinorganic", "Bioinorganic chemistry", "Metalloproteins, haemoglobin and myoglobin, electron transfer, metal ions in medicine."),
-        ("06-solid-state-materials", "Solid-state materials and applications", "Band theory, semiconductors, superconductors, magnetic materials, zeolites and MOFs."),
+
+SECTIONS = [
+ ("01-crystal-and-lattice", "The crystal and its lattice", B01 + B02 + B03 + B04),
+ ("02-close-packing-voids", "Close packing, voids and the radius ratio", B05 + B06 + B07),
+ ("03-diamond-ionic-structures", "Diamond and ionic crystal structures", B08 + B09 + B10),
+ ("04-perovskite-ilmenite-spinel", "Perovskite, ilmenite, tolerance factor and spinel", B12 + B13 + B14),
+ ("05-point-defects", "Point defects", B11),
+ ("06-still-to-come", "Still to come in this chapter", COMING),
+]
+
+def section_nav(current):
+    links = []
+    for slug, title, _ in SECTIONS:
+        cls = ' class="current"' if slug == current else ""
+        links.append(f'<a href="{slug}.html"{cls}>{title}</a>')
+    return '<nav class="section-nav" aria-label="Sections in this chapter">' + " · ".join(links) + "</nav>"
+
+
+import re as _re, json as _json
+
+def _slug(text):
+    s = _re.sub(r"<[^>]+>", "", text).lower()
+    s = _re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+    return s or "section"
+
+def _add_ids(body, tag):
+    def repl(m):
+        inner = m.group(1)
+        return f'<{tag} id="{_slug(inner)}">{inner}</{tag}>'
+    return _re.sub(rf"<{tag}>(.*?)</{tag}>", repl, body)
+
+def _toc_flat(body):
+    entries = _re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)
+    items = "".join(f'<li><a href="#{i}">{_re.sub("<[^>]+>", "", x)}</a></li>' for i, x in entries)
+    return f'<details class="toc" open><summary>Contents</summary><ol>{items}</ol></details>'
+
+def _chapter_page(rel, title, lede, body, crumb):
+    body2 = _add_ids(body, "h2")
+    write(rel, page(rel, title, lede, _toc_flat(body2) + body2, crumb))
+
+def main():
+    # chapter 4: ONE page, all six sections, with a collapsible table of contents
+    ch4_body = '<p class="lead">Chapter 4 of your syllabus, 15 hours. The first five sections are covered by the 23 handwritten pages you uploaded. The sixth lists what is still missing from those pages, so you can see at a glance what the notes do and do not cover.</p>'
+    toc_items = ""
+    for slug, title, content in SECTIONS:
+        c = _add_ids(content.replace("<h2>", "<h3>").replace("</h2>", "</h3>"), "h3")
+        subs = "".join(f'<li><a href="#{i}">{_re.sub("<[^>]+>", "", x)}</a></li>' for i, x in _re.findall(r'<h3 id="([^"]+)">(.*?)</h3>', c))
+        toc_items += f'<li><a href="#{slug}">{title}</a><ol>{subs}</ol></li>'
+        ch4_body += f'<h2 id="{slug}">{title}</h2>' + c
+    toc = f'<details class="toc" open><summary>Contents: Chapter 4</summary><ol>{toc_items}</ol></details>'
+    write("chapters/04-solids/index.html", page("chapters/04-solids/index.html", "Structure and properties of solids", "Chapter 4 · 15 hours. Partly covered by your notes; the rest is listed and waiting.", toc + ch4_body, '<a href="../../index.html">Chapters</a> / Chapter 4'))
+    # old section pages redirect to the single chapter page, at the right section
+    for slug, title, _ in SECTIONS:
+        write(f"chapters/04-solids/{slug}.html", f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=index.html#{slug}"><title>Moved</title></head><body><p>This section now lives on <a href="index.html#{slug}">the Chapter 4 page</a>.</p></body></html>')
+    # old topic URLs redirect to the new section pages
+    old_to_new = {
+        "01-crystalline-amorphous": "01-crystal-and-lattice", "02-lattice-unit-cells": "01-crystal-and-lattice",
+        "03-symmetry-seven-systems": "01-crystal-and-lattice", "04-atoms-per-unit-cell": "01-crystal-and-lattice",
+        "05-close-packing-1d-2d": "02-close-packing-voids", "06-hcp-ccp": "02-close-packing-voids",
+        "07-voids-radius-ratio": "02-close-packing-voids", "08-diamond-cubic": "03-diamond-ionic-structures",
+        "09-ionic-crystals-ab": "03-diamond-ionic-structures", "10-ionic-crystals-ab2": "03-diamond-ionic-structures",
+        "11-point-defects": "05-point-defects", "12-perovskite-ilmenite": "04-perovskite-ilmenite-spinel",
+        "13-tolerance-factor": "04-perovskite-ilmenite-spinel", "14-spinel-cfse": "04-perovskite-ilmenite-spinel",
+    }
+    for old, new in old_to_new.items():
+        dest = f"../04-solids/index.html#{new}"
+        write(f"chapters/01-solid-state/{old}.html", f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={dest}"><title>Moved</title></head><body><p>This page has moved to <a href="{dest}">the Chapter 4 page</a>.</p></body></html>')
+    write("chapters/01-solid-state/index.html", '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=../04-solids/index.html"><title>Moved</title></head><body><p>This chapter has moved to <a href="../04-solids/index.html">Chapter 4 · Structure and properties of solids</a>.</p></body></html>')
+    # chapters 1-3: upload soon
+    upcoming = [
+        ("01-bonding-quantum", "Bonding and properties in chemical system: a quantum chemical approach", "15 hours. The Born-Oppenheimer approximation, the hydrogen molecular ion (H2+), molecular orbital theory, LCAO, LCAO-MO method, MO of homo- and heteronuclear diatomic molecules, MO of polynuclear ABn type molecules, molecular electronic terms, the hydrogen molecule (H2), electron probability density, dipole moment, semiempirical treatment of polyatomic molecules: Hückel method of π-MO calculation, Frost diagram of carbocyclic π-systems."),
+        ("02-elements-coordination", "Chemistry of elements and Coordination chemistry: structure, bonding, stereochemistry and properties", "15 hours. Chemistry of elements: structural versatility, design and synthesis, isolation, characterization, spectral, magnetic and catalytic properties. Non-transition and transition metal complexes, inner-transition metals. Coordination chemistry: Orgel diagram, Tanabe-Sugano diagram, ligand symmetry orbitals, spectral properties, Nephelauxetic effect, Racah parameter, vibronic coupling, spin-orbit coupling, magnetic properties, Jahn-Teller and Renner-Teller effects, CFSE and spectroscopy."),
+        ("03-organometallic", "Organometallic chemistry-I", "15 hours. Valence electron count, oxidation number and formal ligand charge; carbonyl ligand, pi-ligands, complexes containing M-C, M=C and M≡C bonds, hydride and dihydrogen complexes, phosphines and related ligands, spectral analysis and characterization, Dewar-Chatt-Duncanson bonding model, isolobal analogy, agostic interaction."),
     ]
-    for slug, title, desc in planned:
+    for slug, title, desc in upcoming:
         num = slug[:2]
-        body = f'<p class="lead">{desc}</p><aside class="note"><p><strong>Awaiting notes.</strong> This chapter is part of the site structure, but no handwritten pages for it were in the upload. Upload the pages for this chapter and they will be transcribed, checked and added as topic pages in the same format as Chapter 1.</p></aside><p><a class="btn" href="../01-solid-state/index.html">Read Chapter 1 instead</a></p>'
-        write(f"chapters/{slug}/index.html", page(f"chapters/{slug}/index.html", title, "Planned chapter, topic pages will be added from your notes.", body, f'<a href="../../index.html">Chapters</a> / Chapter {num}'))
+        body = f'<p class="lead">{desc}</p><aside class="note"><p><strong>Upload soon.</strong> No handwritten pages for this chapter have been uploaded yet. Upload them and they will be transcribed, checked and added here in the same format as Chapter 4.</p></aside><p><a class="btn" href="../04-solids/index.html">Read Chapter 4 instead</a></p>'
+        _chapter_page(f"chapters/{slug}/index.html", title, "Upload soon. The chapter will be added from your notes.", body, f'<a href="../../index.html">Chapters</a> / Chapter {num}')
     # home
     home_body = """
-<p class="lead">Your handwritten inorganic chemistry notes, set as a readable reference: one chapter per subject, one page per topic, figures redrawn so they can be checked. Chapter 1 is complete from the 23 pages you uploaded. The other chapters are ready to fill. Upload their pages and they join the same structure.</p>
+<p class="lead">Your handwritten inorganic chemistry notes, set as a readable reference: one chapter per subject, one page per section, figures redrawn so they can be checked. Four chapters, 15 hours each. Chapter 4 is partly covered by the 23 pages you uploaded; the other three are waiting for their pages.</p>
 <ol class="chapter-list">
-<li><div><h2><a href="chapters/01-solid-state/index.html">1. Solid state and crystal structures</a></h2><p>Crystalline and amorphous solids, lattices, symmetry, close packing, voids, radius ratio, ionic structures, defects, perovskite, spinel and CFSE.</p></div><span class="status">Complete</span></li>
-<li><div><h2><a href="chapters/02-crystal-field-theory/index.html">2. Crystal field theory in depth</a></h2><p>Splitting, spectrochemical series, spin states, CFSE, Jahn-Teller.</p></div><span class="status">Awaiting notes</span></li>
-<li><div><h2><a href="chapters/03-coordination-compounds/index.html">3. Coordination compounds</a></h2><p>Nomenclature, isomerism, stability, mechanisms.</p></div><span class="status">Awaiting notes</span></li>
-<li><div><h2><a href="chapters/04-organometallic-catalysis/index.html">4. Organometallic chemistry and catalysis</a></h2><p>Carbonyls, the 18-electron rule, catalytic cycles.</p></div><span class="status">Awaiting notes</span></li>
-<li><div><h2><a href="chapters/05-bioinorganic/index.html">5. Bioinorganic chemistry</a></h2><p>Metalloproteins, oxygen transport, electron transfer.</p></div><span class="status">Awaiting notes</span></li>
-<li><div><h2><a href="chapters/06-solid-state-materials/index.html">6. Solid-state materials and applications</a></h2><p>Bands, semiconductors, superconductors, porous solids.</p></div><span class="status">Awaiting notes</span></li>
+<li><div><h2><a href="chapters/01-bonding-quantum/index.html">1. Bonding and properties in chemical system: a quantum chemical approach</a></h2><p>Born-Oppenheimer, H2+, MO theory, LCAO, diatomic and polynuclear molecules, Hückel method, Frost diagrams.</p></div><span class="status">Upload soon · 15 hours</span></li>
+<li><div><h2><a href="chapters/02-elements-coordination/index.html">2. Chemistry of elements and Coordination chemistry</a></h2><p>Elements and complexes, inner-transition metals, Orgel and Tanabe-Sugano diagrams, spectra, magnetism, Jahn-Teller.</p></div><span class="status">Upload soon · 15 hours</span></li>
+<li><div><h2><a href="chapters/03-organometallic/index.html">3. Organometallic chemistry-I</a></h2><p>Electron count, carbonyls, pi-ligands, M-C bonds, hydrides, phosphines, Dewar-Chatt-Duncanson, isolobal analogy.</p></div><span class="status">Upload soon · 15 hours</span></li>
+<li><div><h2><a href="chapters/04-solids/index.html">4. Structure and properties of solids</a></h2><p>Crystalline and amorphous solids, lattices, close packing, ionic structures, perovskite, spinel, defects, and what is still to come.</p></div><span class="status">Partly covered · 15 hours</span></li>
 </ol>
-<p><a class="btn btn-primary" href="chapters/01-solid-state/14-spinel-cfse.html">Spinel and CFSE</a></p>
+<p><a class="btn btn-primary" href="chapters/04-solids/index.html">Start Chapter 4</a></p>
 """
     write("index.html", page("index.html", "Solid state, drawn clearly", "Inorganic chemistry notes, chapter by chapter, with the figures redrawn and the handwriting checked.", home_body, "Home"))
     # sources
@@ -702,12 +772,15 @@ def main():
 <p class="lead">Every page was transcribed from the rendered PDF pages first, then checked. Where the handwriting and the standard source disagreed, the site keeps the standard result and says what the notes said.</p>
 <h2>What was transcribed</h2>
 <p>The uploaded PDF, <span class="num">PDF_Gallery_20261115_202140.pdf</span>, 23 pages of handwritten notes. Page 11 is a duplicate photograph of page 10, so it adds no new topic. The single photograph you sent in chat is page 23 of that PDF.</p>
+<h2>What the notes cover in Chapter 4, and what is still missing</h2>
+<p><strong>Covered by your notes:</strong> crystalline and amorphous solids, lattice, basis, unit cell, symmetry elements, Bravais lattices, close packing (hcp, ccp), voids, radius ratio rules, AB and AB₂ type structures, perovskite, ilmenite, rutile, tolerance factor and structural distortion, normal and inverse spinel, cation distribution, diamond cubic, zinc blende and wurtzite, point defects (Schottky and Frenkel), F-centres (as a question), n-type and p-type semiconductors (as a margin question only).</p>
+<p><strong>Not in your notes yet:</strong> types of bonding in solids, lattice energy, Born-Haber cycle, Madelung constant, crystal field considerations in solids, silicates (pyroxenes, amphiboles, talc, mica, clays, zeolites), line and surface defects, non-stoichiometric compounds, defect equilibria, band theory, conductors, insulators and semiconductors, superconductivity, magnetism (dia-, para-, ferro-, antiferro- and ferrimagnetism), polarization, ferroelectricity, piezoelectricity, liquid crystals. These are listed on the last section page of Chapter 4. Upload the pages that cover them and they will be added there.</p>
 <h2>What was checked, and where</h2>
 <table><thead><tr><th>Claim in the notes</th><th>Result</th><th>Source</th></tr></thead><tbody>
 <tr><td>Normal spinel: A<sup>2+</sup> in 1/8 Td, B<sup>3+</sup> in 1/2 Oct; inverse: B(AB)O<sub>4</sub></td><td>Correct</td><td>LibreTexts, Spinel, Perovskite, and Rutile Structures</td></tr>
 <tr><td>Site selection governed by relative CFSE in Oct and Td holes</td><td>Correct, the standard explanation for transition-metal oxide spinels</td><td>LibreTexts, Spinel, Perovskite, and Rutile Structures</td></tr>
 <tr><td>OSPE: d<sup>3</sup>/d<sup>8</sup> 0.84, d<sup>4</sup>/d<sup>9</sup> 0.42, d<sup>2</sup>/d<sup>7</sup> 0.27, d<sup>1</sup>/d<sup>6</sup> 0.13, d<sup>0</sup>/d<sup>5</sup>/d<sup>10</sup> 0 (Δ<sub>o</sub>)</td><td>Correct, high spin, Δ<sub>t</sub> = 4/9 Δ<sub>o</sub></td><td>LibreTexts, Octahedral vs. Tetrahedral Geometries</td></tr>
-<tr><td>Goldschmidt t: &gt;1 hexagonal/tetragonal, 0.9 to 1 cubic, 0.71 to 0.9 orthorhombic/rhombohedral, below about 0.8 ilmenite-type</td><td>Ranges are a guide only; the notes' 0.8 / 1.05 collapse limits are the working rule</td><td>Wikipedia, Goldschmidt tolerance factor</td></tr>
+<tr><td>Goldschmidt t: &gt;1 hexagonal/tetragonal, 0.9 to 1 cubic, 0.71 to 0.9 orthorhombic/rhombohedral, about 0.8 ilmenite-type</td><td>Ranges are a guide only; the notes' 0.8 / 1.05 collapse limits are the working rule</td><td>Wikipedia, Goldschmidt tolerance factor</td></tr>
 <tr><td>Perovskite: Ca corners, O face centres, Ti body centre; Ti CN 6, Ca CN 12</td><td>Correct</td><td>Wikipedia, Perovskite; University of Sydney, CHEM1902 2007-N-6</td></tr>
 <tr><td>Ilmenite FeTiO<sub>3</sub>, corundum-type, 2/3 of octahedral holes filled</td><td>Correct, with Fe<sup>2+</sup> (not Fe<sup>3+</sup> as one crossed-out word suggested)</td><td>LibreTexts / standard corundum description</td></tr>
 <tr><td>Radius ratios 0.225 / 0.414 / 0.732</td><td>Correct</td><td>LibreTexts, Structures of Simple Binary Compounds</td></tr>
@@ -721,14 +794,55 @@ def main():
 <li>The notes write “stacking fold”; the standard term is “stacking fault”.</li>
 <li>Antifluorite (Li<sub>2</sub>O, Na<sub>2</sub>O) and the radius-ratio “guide, not a law” sentence are standard material added by the site, not in the notes, and are marked as such on the pages.</li></ul>
 <h2>Design</h2>
-<p>Built with the Hallmark design skill (nutlope/hallmark, installed with <span class="num">npx skills add nutlope/hallmark -g</span>), theme Grid: white poster stock, blue-black ink, Radio Canada Big heads over Radio Canada, flat fields of ultramarine and one Swiss red mark. The notes' wording is kept word for word, organised into topics; anything added or corrected is flagged in a note on the page. All figures are inline SVG drawn for this site, no photographs of the handwritten pages are reproduced, so the text is searchable. Figures are animated as an extra, with a pause button in the footer and a still version under reduced-motion settings.</p>
+<p>Redesigned from scratch to a warm lab-notebook look: paper #FAF7F1, deep teal accent, Fraunces heads over Source Sans 3, one 760px column shared by the text and the figures, built with the Hallmark design skill (nutlope/hallmark, installed with <span class="num">npx skills add nutlope/hallmark -g</span>) and checked against the taste and UI/UX skills. The notes' wording is kept word for word, organised into topics; anything added or corrected is flagged in a note on the page. All figures are inline SVG drawn for this site, no photographs of the handwritten pages are reproduced, so the text is searchable. Figures are animated as an extra, with a pause button in the footer and a still version under reduced-motion settings.</p>
 """
-    write("sources.html", page("sources.html", "Sources and checks", "How the handwriting was read, what was verified online, and what was corrected.", sources_body, '<a href="index.html">Chapters</a> / Sources'))
+    _chapter_page("sources.html", "Sources and checks", "How the handwriting was read, what was verified online, and what was corrected.", sources_body, '<a href="index.html">Chapters</a> / Sources')
+    # search index: one entry per heading, from the finished pages
+    entries = []
+    for rel in ["index.html", "sources.html", "chapters/01-bonding-quantum/index.html", "chapters/02-elements-coordination/index.html", "chapters/03-organometallic/index.html", "chapters/04-solids/index.html"]:
+        html = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+        main = html.split("<main", 1)[1].split("</main>", 1)[0] if "<main" in html else html
+        parts = _re.split(r'<h[23] id="([^"]+)">(.*?)</h[23]>', main)
+        # parts: [pre, id, title, text, id, title, text, ...]
+        for k in range(1, len(parts) - 1, 3):
+            anchor, heading, text = parts[k], parts[k+1], parts[k+2]
+            plain = _re.sub(r"<[^>]+>", " ", text)
+            plain = _re.sub(r"\s+", " ", plain).strip()
+            entries.append({"t": _re.sub("<[^>]+>", "", heading).strip(), "u": rel, "a": anchor, "x": plain[:600]})
+    with open(os.path.join(ROOT, "assets", "search.json"), "w", encoding="utf-8") as f:
+        _json.dump(entries, f, ensure_ascii=False)
+    print("search index:", len(entries), "entries")
     # deploy files
     with open(os.path.join(ROOT, "wrangler.toml"), "w", encoding="utf-8") as f:
         f.write('name = "inorganicvii"\ncompatibility_date = "2026-11-15"\npages_build_output_dir = "."\n')
     with open(os.path.join(ROOT, "README.md"), "w", encoding="utf-8") as f:
-        f.write("# inorganicvii\n\nStatic multi-page notes site for Cloudflare Pages.\nProduction URL: https://inorganicvii.pages.dev\n\n## Structure\n\n- `index.html`, chapter list\n- `chapters/01-solid-state/`, 14 topic pages, transcribed from the 23-page PDF\n- `chapters/02-…/06-…/`, planned chapters, awaiting notes\n- `sources.html`, verification log\n- `assets/style.css`, Hallmark Grid theme\n\n## Deploy to Cloudflare Pages\n\n```bash\ncd inorganicvii\nnpx wrangler login\nnpx wrangler pages deploy . --project-name inorganicvii\n```\n\nFirst time only: `npx wrangler pages project create inorganicvii --production-branch main`\n\nOr in the dashboard: Workers and Pages, then Create, then Pages, then Upload assets, then upload this folder, project name `inorganicvii`.\n\nNo build step. No server code.\n")
+        f.write("""# inorganicvii
+
+Static multi-page notes site for Cloudflare Pages.
+Production URL: https://inorganicvii.pages.dev
+
+## Structure
+
+- `index.html`, chapter list (4 syllabus chapters)
+- `chapters/04-solids/`, 6 section pages, transcribed from the 23-page PDF
+- `chapters/01-bonding-quantum/`, `02-elements-coordination/`, `03-organometallic/`, upload soon
+- `sources.html`, verification log and syllabus coverage
+- `assets/style.css`, site theme
+
+## Deploy to Cloudflare Pages
+
+```bash
+cd inorganicvii
+npx wrangler login
+npx wrangler pages deploy . --project-name inorganicvii
+```
+
+First time only: `npx wrangler pages project create inorganicvii --production-branch main`
+
+Or in the dashboard: Workers and Pages, then Create, then Pages, then Upload assets, then upload this folder, project name `inorganicvii`.
+
+No build step. No server code.
+""")
     print("done")
 
 if __name__ == "__main__":
