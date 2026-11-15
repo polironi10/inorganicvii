@@ -7,42 +7,45 @@
 <meta name="description" content="How the handwriting was read, what was verified online, and what was corrected.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:wght@400;700&family=Radio+Canada:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="page">
 <header class="topbar"><div class="container">
 <a class="wordmark" href="index.html"><span>Inorganic</span><span>VII</span></a>
-<nav aria-label="Main"><a href="index.html">Chapters</a><a href="chapters/01-solid-state/index.html">Solid state</a><a href="sources.html">Sources and checks</a></nav>
+<nav aria-label="Main"><a href="index.html">Chapters</a><button type="button" class="search-btn" id="search-btn" aria-expanded="false">Search</button><a href="chapters/04-solids/index.html">Chapter 4 · Solids</a><a href="sources.html">Sources and checks</a></nav>
 </div></header>
 <main class="container">
 <p class="crumb"><a href="index.html">Chapters</a> / Sources</p>
 <div class="hero"><h1>Sources and checks</h1><p class="lede">How the handwriting was read, what was verified online, and what was corrected.</p></div>
 
-
+<details class="toc" open><summary>Contents</summary><ol><li><a href="#what-was-transcribed">What was transcribed</a></li><li><a href="#what-the-notes-cover-in-chapter-4-and-what-is-still-missing">What the notes cover in Chapter 4, and what is still missing</a></li><li><a href="#what-was-checked-and-where">What was checked, and where</a></li><li><a href="#corrections-made-on-the-site">Corrections made on the site</a></li><li><a href="#design">Design</a></li></ol></details>
 <p class="lead">Every page was transcribed from the rendered PDF pages first, then checked. Where the handwriting and the standard source disagreed, the site keeps the standard result and says what the notes said.</p>
-<h2>What was transcribed</h2>
+<h2 id="what-was-transcribed">What was transcribed</h2>
 <p>The uploaded PDF, <span class="num">PDF_Gallery_20261115_202140.pdf</span>, 23 pages of handwritten notes. Page 11 is a duplicate photograph of page 10, so it adds no new topic. The single photograph you sent in chat is page 23 of that PDF.</p>
-<h2>What was checked, and where</h2>
+<h2 id="what-the-notes-cover-in-chapter-4-and-what-is-still-missing">What the notes cover in Chapter 4, and what is still missing</h2>
+<p><strong>Covered by your notes:</strong> crystalline and amorphous solids, lattice, basis, unit cell, symmetry elements, Bravais lattices, close packing (hcp, ccp), voids, radius ratio rules, AB and AB₂ type structures, perovskite, ilmenite, rutile, tolerance factor and structural distortion, normal and inverse spinel, cation distribution, diamond cubic, zinc blende and wurtzite, point defects (Schottky and Frenkel), F-centres (as a question), n-type and p-type semiconductors (as a margin question only).</p>
+<p><strong>Not in your notes yet:</strong> types of bonding in solids, lattice energy, Born-Haber cycle, Madelung constant, crystal field considerations in solids, silicates (pyroxenes, amphiboles, talc, mica, clays, zeolites), line and surface defects, non-stoichiometric compounds, defect equilibria, band theory, conductors, insulators and semiconductors, superconductivity, magnetism (dia-, para-, ferro-, antiferro- and ferrimagnetism), polarization, ferroelectricity, piezoelectricity, liquid crystals. These are listed on the last section page of Chapter 4. Upload the pages that cover them and they will be added there.</p>
+<h2 id="what-was-checked-and-where">What was checked, and where</h2>
 <table><thead><tr><th>Claim in the notes</th><th>Result</th><th>Source</th></tr></thead><tbody>
 <tr><td>Normal spinel: A<sup>2+</sup> in 1/8 Td, B<sup>3+</sup> in 1/2 Oct; inverse: B(AB)O<sub>4</sub></td><td>Correct</td><td>LibreTexts, Spinel, Perovskite, and Rutile Structures</td></tr>
 <tr><td>Site selection governed by relative CFSE in Oct and Td holes</td><td>Correct, the standard explanation for transition-metal oxide spinels</td><td>LibreTexts, Spinel, Perovskite, and Rutile Structures</td></tr>
 <tr><td>OSPE: d<sup>3</sup>/d<sup>8</sup> 0.84, d<sup>4</sup>/d<sup>9</sup> 0.42, d<sup>2</sup>/d<sup>7</sup> 0.27, d<sup>1</sup>/d<sup>6</sup> 0.13, d<sup>0</sup>/d<sup>5</sup>/d<sup>10</sup> 0 (Δ<sub>o</sub>)</td><td>Correct, high spin, Δ<sub>t</sub> = 4/9 Δ<sub>o</sub></td><td>LibreTexts, Octahedral vs. Tetrahedral Geometries</td></tr>
-<tr><td>Goldschmidt t: &gt;1 hexagonal/tetragonal, 0.9 to 1 cubic, 0.71 to 0.9 orthorhombic/rhombohedral, below about 0.8 ilmenite-type</td><td>Ranges are a guide only; the notes' 0.8 / 1.05 collapse limits are the working rule</td><td>Wikipedia, Goldschmidt tolerance factor</td></tr>
+<tr><td>Goldschmidt t: &gt;1 hexagonal/tetragonal, 0.9 to 1 cubic, 0.71 to 0.9 orthorhombic/rhombohedral, about 0.8 ilmenite-type</td><td>Ranges are a guide only; the notes' 0.8 / 1.05 collapse limits are the working rule</td><td>Wikipedia, Goldschmidt tolerance factor</td></tr>
 <tr><td>Perovskite: Ca corners, O face centres, Ti body centre; Ti CN 6, Ca CN 12</td><td>Correct</td><td>Wikipedia, Perovskite; University of Sydney, CHEM1902 2007-N-6</td></tr>
 <tr><td>Ilmenite FeTiO<sub>3</sub>, corundum-type, 2/3 of octahedral holes filled</td><td>Correct, with Fe<sup>2+</sup> (not Fe<sup>3+</sup> as one crossed-out word suggested)</td><td>LibreTexts / standard corundum description</td></tr>
 <tr><td>Radius ratios 0.225 / 0.414 / 0.732</td><td>Correct</td><td>LibreTexts, Structures of Simple Binary Compounds</td></tr>
 <tr><td>Diamond packing efficiency 34%</td><td>Correct</td><td>Standard calculation, a = 8r/√3</td></tr>
 <tr><td>HCP and CCP packing efficiency 74%, CN 12</td><td>Correct</td><td>Standard close-packing result</td></tr>
 </tbody></table>
-<h2>Corrections made on the site</h2>
+<h2 id="corrections-made-on-the-site">Corrections made on the site</h2>
 <ul><li>Ilmenite: Fe<sup>2+</sup>, not Fe<sup>3+</sup>.</li><li>Perovskite A-site list: Cr removed from the A<sup>II</sup> list.</li><li>Tetrahedral radius-ratio working: the crossed-out algebra in the notes was not reproduced; the standard limiting value 0.225 is given.</li><li>Tolerance-factor limits: the standard 0.71 to 1.0 ranges are given, with the notes’ 0.8 / 1.05 rule marked as an approximation.</li><li>BCC paragraph: the in-plane neighbour count of four is not the bcc coordination number, which is 8.</li>
 <li>Zinc-blende working: the notes' tetrahedral algebra is crossed out and its last legible step gives 0.449, not 0.225. The page gives the standard working instead, a quarter of the body diagonal, r<sup>+</sup> + r<sup>−</sup> = √3a/4.</li>
 <li>Tolerance factor: the notes' 0.8 / 1.05 collapse limits are kept as the working rule, and the table now says the ranges are a guide only, because MgTiO<sub>3</sub> (t = 0.81) and FeTiO<sub>3</sub> (t ≈ 0.82) are ilmenite inside the nominal perovskite range, and CaTiO<sub>3</sub> (t ≈ 0.97) is orthorhombic despite t near 1.</li>
 <li>The notes write “stacking fold”; the standard term is “stacking fault”.</li>
 <li>Antifluorite (Li<sub>2</sub>O, Na<sub>2</sub>O) and the radius-ratio “guide, not a law” sentence are standard material added by the site, not in the notes, and are marked as such on the pages.</li></ul>
-<h2>Design</h2>
-<p>Built with the Hallmark design skill (nutlope/hallmark, installed with <span class="num">npx skills add nutlope/hallmark -g</span>), theme Grid: white poster stock, blue-black ink, Radio Canada Big heads over Radio Canada, flat fields of ultramarine and one Swiss red mark. The notes' wording is kept word for word, organised into topics; anything added or corrected is flagged in a note on the page. All figures are inline SVG drawn for this site, no photographs of the handwritten pages are reproduced, so the text is searchable. Figures are animated as an extra, with a pause button in the footer and a still version under reduced-motion settings.</p>
+<h2 id="design">Design</h2>
+<p>Redesigned from scratch to a warm lab-notebook look: paper #FAF7F1, deep teal accent, Fraunces heads over Source Sans 3, one 760px column shared by the text and the figures, built with the Hallmark design skill (nutlope/hallmark, installed with <span class="num">npx skills add nutlope/hallmark -g</span>) and checked against the taste and UI/UX skills. The notes' wording is kept word for word, organised into topics; anything added or corrected is flagged in a note on the page. All figures are inline SVG drawn for this site, no photographs of the handwritten pages are reproduced, so the text is searchable. Figures are animated as an extra, with a pause button in the footer and a still version under reduced-motion settings.</p>
 
 </main>
 <footer><div class="container">
@@ -50,5 +53,10 @@
 <p><a href="index.html">All chapters</a></p><p><a href="sources.html">Sources and checks</a></p>
 <p><button type="button" class="motion-toggle" onclick="document.body.classList.toggle('no-motion');this.textContent=document.body.classList.contains('no-motion')?'Resume motion':'Pause motion'">Pause motion</button></p>
 </div></footer>
+<div class="search-panel" id="search-panel" data-index="assets/search.json" hidden>
+<div class="search-box"><input type="search" id="search-input" placeholder="Search the notes..." aria-label="Search the notes"><button type="button" id="search-close">Close</button></div>
+<ol id="search-results"></ol>
+</div>
+<script src="assets/search.js" defer></script>
 </body>
 </html>
