@@ -400,6 +400,7 @@ def page(rel, title, lede, body, crumb=""):
 <ol id="search-results"></ol>
 </div>
 <script src="{prefix}assets/search.js" defer></script>
+<script src="{prefix}assets/toc.js" defer></script>
 </body>
 </html>
 """
@@ -708,10 +709,16 @@ def _add_ids(body, tag):
         return f'<{tag} id="{_slug(inner)}">{inner}</{tag}>'
     return _re.sub(rf"<{tag}>(.*?)</{tag}>", repl, body)
 
+def _toc_widget(items, title="Contents"):
+    return (f'<div class="toc-widget"><button type="button" class="toc-btn" id="toc-btn" aria-expanded="false" aria-controls="toc-panel">{title}</button>'
+            f'<div class="toc-panel" id="toc-panel" hidden><div class="toc-head"><span>{title}</span>'
+            f'<button type="button" class="toc-close" id="toc-close" aria-label="Close contents">&times;</button></div>'
+            f'<ol>{items}</ol></div></div>')
+
 def _toc_flat(body):
     entries = _re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)
     items = "".join(f'<li><a href="#{i}">{_re.sub("<[^>]+>", "", x)}</a></li>' for i, x in entries)
-    return f'<details class="toc" open><summary>Contents</summary><ol>{items}</ol></details>'
+    return _toc_widget(items)
 
 def _chapter_page(rel, title, lede, body, crumb):
     body2 = _add_ids(body, "h2")
@@ -726,7 +733,7 @@ def main():
         subs = "".join(f'<li><a href="#{i}">{_re.sub("<[^>]+>", "", x)}</a></li>' for i, x in _re.findall(r'<h3 id="([^"]+)">(.*?)</h3>', c))
         toc_items += f'<li><a href="#{slug}">{title}</a><ol>{subs}</ol></li>'
         ch4_body += f'<h2 id="{slug}">{title}</h2>' + c
-    toc = f'<details class="toc" open><summary>Contents: Chapter 4</summary><ol>{toc_items}</ol></details>'
+    toc = _toc_widget(toc_items)
     write("chapters/04-solids/index.html", page("chapters/04-solids/index.html", "Structure and properties of solids", "Chapter 4 · 15 hours. Partly covered by your notes; the rest is listed and waiting.", toc + ch4_body, '<a href="../../index.html">Chapters</a> / Chapter 4'))
     # old section pages redirect to the single chapter page, at the right section
     for slug, title, _ in SECTIONS:
