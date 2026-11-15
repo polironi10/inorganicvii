@@ -9,6 +9,7 @@
   --paper: #FAF7F1; --surface: #FFFDF8; --ink: #20242B; --muted: #5A6470;
   --accent: #0F766E; --accent-ink: #FAF7F1; --rule: #E3DED2; --red: #B91C1C;
   --color-scrim: rgba(32, 36, 43, 0.5);
+  --color-shadow: rgba(32, 36, 43, 0.15);
   --color-paper: var(--paper); --color-paper-2: #F3EFE6; --color-paper-3: #EAE4D6;
   --color-ink: var(--ink); --color-ink-2: #2E3440; --color-muted: var(--muted);
   --color-rule: var(--rule); --color-accent: var(--accent); --color-accent-ink: var(--accent-ink);
