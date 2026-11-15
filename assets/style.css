@@ -66,16 +66,16 @@ main h3 { margin-top: var(--space-xl); margin-bottom: var(--space-sm); }
 figure { margin: var(--space-2xl) 0; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-lg); overflow-x: auto; }
 figure svg { width: 100%; height: auto; min-width: 520px; }
 figcaption { font-size: 0.875rem; color: var(--muted); margin-top: var(--space-md); }
-.fig-pair { display: flex; gap: var(--space-lg); }
-.fig-side { display: flex; gap: var(--space-lg); align-items: start; }
-.fig-side .fig-draw { flex: 1 1 0; min-width: 0; }
+.fig-pair { display: flex; flex-direction: column; gap: var(--space-lg); }
+.fig-side { display: flex; flex-direction: column; gap: var(--space-lg); }
+.fig-side .fig-draw { min-width: 0; }
 .fig-side .fig-draw svg { width: 100%; min-width: 0; }
-.fig-side .fig-text { flex: 1 1 0; min-width: 0; }
+.fig-side .fig-text { min-width: 0; }
 .fig-side .fig-text p { margin-bottom: var(--space-xs); }
 .fig-text .hl { color: var(--color-ember); font-weight: 600; }
 .fig-text .cat { color: var(--accent); font-weight: 600; }
 .fig-text .mut { color: var(--muted); }
-.fig-pair svg { flex: 1 1 0; width: auto; min-width: 0; }
+.fig-pair svg { width: 100%; min-width: 0; }
 .hero-cubes { display: flex; gap: var(--space-lg); flex-wrap: wrap; justify-content: space-around; }
 .hero-cubes svg { flex: 1 1 160px; width: auto; min-width: 0; max-width: 220px; }
 .formula { background: var(--ink); color: var(--paper); font-family: var(--font-display); font-size: 1.25rem; line-height: 1.4; padding: var(--space-lg); margin: var(--space-lg) 0; border-radius: var(--radius-card); overflow-x: auto; }
@@ -117,8 +117,6 @@ figure svg .anim-pulse { animation: pulse 2.8s ease-in-out infinite; }
 
 /* ---- mobile ---- */
 @media (max-width: 60rem) {
-  .fig-pair { flex-direction: column; }
-  .fig-side { flex-direction: column; }
   table { overflow-x: visible; }
   table thead { display: none; }
   table tbody { display: block; }
