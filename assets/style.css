@@ -67,6 +67,14 @@ figure { margin: var(--space-2xl) 0; background: var(--surface); border: 1px sol
 figure svg { width: 100%; height: auto; min-width: 520px; }
 figcaption { font-size: 0.875rem; color: var(--muted); margin-top: var(--space-md); }
 .fig-pair { display: flex; gap: var(--space-lg); }
+.fig-side { display: flex; gap: var(--space-lg); align-items: start; }
+.fig-side .fig-draw { flex: 1 1 0; min-width: 0; }
+.fig-side .fig-draw svg { width: 100%; min-width: 0; }
+.fig-side .fig-text { flex: 1 1 0; min-width: 0; }
+.fig-side .fig-text p { margin-bottom: var(--space-xs); }
+.fig-text .hl { color: var(--color-ember); font-weight: 600; }
+.fig-text .cat { color: var(--accent); font-weight: 600; }
+.fig-text .mut { color: var(--muted); }
 .fig-pair svg { flex: 1 1 0; width: auto; min-width: 0; }
 .hero-cubes { display: flex; gap: var(--space-lg); flex-wrap: wrap; justify-content: space-around; }
 .hero-cubes svg { flex: 1 1 160px; width: auto; min-width: 0; max-width: 220px; }
@@ -98,20 +106,26 @@ footer a { font-weight: 600; }
 /* ---- motion: purpose or nothing ---- */
 @keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-@keyframes drop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes drawline { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 .hero h1 { animation: enter 500ms var(--ease-out) both; }
 .hero .lede { animation: enter 500ms var(--ease-out) 120ms both; }
 .hero-field .cube { animation: bob 6s ease-in-out infinite; transform-box: fill-box; }
-figure svg .anim-drop { animation: drop 500ms var(--ease-out) both; transform-box: fill-box; }
-figure svg .anim-line { animation: drawline 500ms var(--ease-out) both; transform-box: fill-box; transform-origin: left center; }
+figure svg .anim-drop { transform-box: fill-box; }
+figure svg .anim-line { transform-box: fill-box; transform-origin: left center; }
 figure svg .anim-pulse { animation: pulse 2.8s ease-in-out infinite; }
 .no-motion *, .no-motion *::before, .no-motion *::after { animation: none !important; transition: none !important; }
 
 /* ---- mobile ---- */
 @media (max-width: 60rem) {
   .fig-pair { flex-direction: column; }
+  .fig-side { flex-direction: column; }
+  table { overflow-x: visible; }
+  table thead { display: none; }
+  table tbody { display: block; }
+  table tbody tr { display: block; margin-bottom: var(--space-md); border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-sm) var(--space-md); }
+  table tbody td { display: block; border: none; padding: var(--space-2xs) 0; }
+  table tbody td::before { content: attr(data-label) ": "; font-weight: 600; }
+  table tbody td[data-label=""]::before { content: none; }
   .quote { font-size: 1.25rem; }
   figure { padding: var(--space-md); }
   .formula { font-size: 1.125rem; padding: var(--space-md); }
