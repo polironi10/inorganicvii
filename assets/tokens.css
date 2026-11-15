@@ -1,22 +1,21 @@
+/* Redesign from scratch — warm lab notebook (see redesign-brief.md). Fraunces + Source Sans 3, deep teal accent, one 760px measure. */
 :root {
   color-scheme: light;
-  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
-  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
-  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
-  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
-  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
-  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
-  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(97.5% 0.005 90); --color-paper-2: oklch(94.2% 0.006 90); --color-paper-3: oklch(90.5% 0.008 90);
-  --color-ink: oklch(19% 0.022 266); --color-ink-2: oklch(31% 0.02 266); --color-muted: oklch(47% 0.016 266);
-  --color-rule: oklch(87.5% 0.008 90);
-  --color-accent: oklch(44% 0.2 266); --color-accent-ink: oklch(97.5% 0.005 90); --color-focus: oklch(46% 0.2 266);
-  --color-field: oklch(44% 0.2 266); --color-field-ink: oklch(97.5% 0.005 90);
-  --color-mark: oklch(57% 0.215 29); --color-mark-ink: oklch(97.5% 0.005 90);
-  --font-display: "Radio Canada Big", ui-sans-serif, system-ui, sans-serif; --font-body: "Radio Canada", ui-sans-serif, system-ui, sans-serif;
-  --font-outlier: var(--font-display);
-  --radius-card: 0; --radius-pill: 0; --rule-hair: 1px; --shadow-card: none;
-  --tracking-display: -0.035em; --display-weight: 700;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.0625rem;
+  --text-display: 2.75rem; --text-section: 1.875rem; --text-title: 1.375rem; --text-lead: 1.25rem;
+  --dur-fast: 150ms; --dur-med: 250ms; --dur-slow: 500ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --paper: #FAF7F1; --surface: #FFFDF8; --ink: #20242B; --muted: #5A6470;
+  --accent: #0F766E; --accent-ink: #FAF7F1; --rule: #E3DED2; --red: #B91C1C;
+  --color-scrim: rgba(32, 36, 43, 0.5);
+  --color-paper: var(--paper); --color-paper-2: #F3EFE6; --color-paper-3: #EAE4D6;
+  --color-ink: var(--ink); --color-ink-2: #2E3440; --color-muted: var(--muted);
+  --color-rule: var(--rule); --color-accent: var(--accent); --color-accent-ink: var(--accent-ink);
+  --color-focus: var(--accent); --color-field: var(--accent); --color-field-ink: #FAF7F1;
+  --color-mark: var(--red); --color-mark-ink: #FAF7F1;
+  --font-display: "Fraunces", Georgia, serif; --font-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 10px; --rule-hair: 1px;
+  --tracking-display: -0.02em; --display-weight: 600;
+  --measure: 760px; --gutter: 24px; --gap-columns: 24px;
 }
