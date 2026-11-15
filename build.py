@@ -16,7 +16,7 @@ def cube_svg(kind="sc", title=""):
     lines=""
     for a,b in zip(front, back): lines+=f'<line x1="{a[0]}" y1="{a[1]}" x2="{b[0]}" y2="{b[1]}" stroke="{INK}" stroke-width="1.5"/>'
     poly=lambda pts: " ".join(f"{x},{y}" for x,y in pts)
-    s=svg_open(760,300,"0 0 760 300")
+    s=svg_open(760,300,"0 0 380 300")
     s+=f'<rect x="0" y="0" width="760" height="300" fill="{PAPER}"/>'
     s+=f'<polygon points="{poly(front)}" fill="none" stroke="{INK}" stroke-width="2"/><polygon points="{poly(back)}" fill="none" stroke="{INK}" stroke-width="2"/>{lines}'
     def dot(x,y,r=9,fill=INK): return f'<circle cx="{x}" cy="{y}" r="{r}" fill="{fill}" stroke="#fff" stroke-width="1.5"/>'
@@ -29,13 +29,13 @@ def cube_svg(kind="sc", title=""):
         s+=dot(160,160,9,BLUE)  # front face centre
         s+=dot(195,35,9,BLUE)   # top face centre approx
         s+=dot(295,155,9,BLUE)  # right face centre approx
-        s+=f'<text x="380" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">faces: 6 x 1/2 = 3</text><text x="380" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">total = 4 atoms</text>'
+        html = '<p>corners: 8 x 1/8 = 1</p><p>faces: 6 x 1/2 = 3</p><p class="hl">total = 4 atoms</p>'
     elif kind=="bcc":
-        s+=f'<text x="380" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">centre: 1 (unshared)</text><text x="380" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">total = 2 atoms</text>'
+        html = '<p>corners: 8 x 1/8 = 1</p><p>centre: 1 (unshared)</p><p class="hl">total = 2 atoms</p>'
     else:
-        s+=f'<text x="380" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">corners: 8 x 1/8 = 1</text><text x="380" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">total = 1 atom</text>'
+        html = '<p>corners: 8 x 1/8 = 1</p><p class="hl">total = 1 atom</p>'
     s+=f'<text x="60" y="290" font-family="Source Sans 3, sans-serif" font-size="14" fill="{MUT}">{title}</text></svg>'
-    return s
+    return s, html
 
 def fig(caption, inner):
     return f'<figure>{inner}<figcaption>{caption}</figcaption></figure>'
@@ -48,6 +48,9 @@ def split2(s, w=760, h=300, cut=380):
 
 def fig_pair(caption, inner_a, inner_b):
     return f'<figure><div class="fig-pair">{inner_a}{inner_b}</div><figcaption>{caption}</figcaption></figure>'
+
+def fig_side(caption, drawing, text_html):
+    return f'<figure><div class="fig-side"><div class="fig-draw">{drawing}</div><div class="fig-text">{text_html}</div></div><figcaption>{caption}</figcaption></figure>'
 
 # ---- individual figures ----
 def fig_order():
@@ -62,14 +65,14 @@ def fig_order():
         x=430+random.randint(0,260); y=40+random.randint(0,180)
         s+=f'<circle cx="{x}" cy="{y}" r="11" fill="none" stroke="{MUT}" stroke-width="1.5"/>'
     s+=f'<text x="430" y="270" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Amorphous: short range order only</text></svg>'
-    return s
+    return split2(s, 760, 300)
 
 def fig_axes():
-    s=svg_open(760,300)
+    s=svg_open(760,300,"0 0 440 300")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/><line x1="180" y1="200" x2="420" y2="200" stroke="{INK}" stroke-width="2"/><line x1="180" y1="200" x2="180" y2="60" stroke="{INK}" stroke-width="2"/><line x1="180" y1="200" x2="330" y2="110" stroke="{INK}" stroke-width="2"/>'
     s+=f'<text x="430" y="205" font-family="Source Sans 3, sans-serif" font-size="16" fill="{INK}">a</text><text x="170" y="45" font-family="Source Sans 3, sans-serif" font-size="16" fill="{INK}">c</text><text x="340" y="105" font-family="Source Sans 3, sans-serif" font-size="16" fill="{INK}">b</text>'
-    s+=f'<text x="480" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">alpha: between b and c</text><text x="480" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">beta: between a and c</text><text x="480" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">gamma: between a and b</text><text x="480" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">6 lattice parameters:</text><text x="480" y="215" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">a, b, c, alpha, beta, gamma</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, '<p>alpha: between b and c</p><p>beta: between a and c</p><p>gamma: between a and b</p><p class="hl">6 lattice parameters:</p><p>a, b, c, alpha, beta, gamma</p>'
 
 def fig_packing():
     s=svg_open(760,320)
@@ -129,7 +132,7 @@ def fig_voids():
     return split2(s, 760, 320)
 
 def fig_radius():
-    s=svg_open(760,320)
+    s=svg_open(760,320,"0 0 320 320")
     s+=f'<rect width="760" height="320" fill="{PAPER}"/>'
     # 3D cube: front (80,90)-(250,260), back offset (60,-45)
     front=[(80,260),(250,260),(250,90),(80,90)]
@@ -141,14 +144,13 @@ def fig_radius():
     s+=f'<line x1="80" y1="260" x2="310" y2="45" stroke="{ACC}" stroke-width="2"/>'
     for p in front+back: s+=f'<circle cx="{p[0]}" cy="{p[1]}" r="16" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
     s+=f'<circle cx="195" cy="152" r="14" fill="{BLUE}"/>'
-    s+=f'<text x="330" y="60" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Anion: corners</text><text x="330" y="88" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Cation: body centre</text>'
-    s+=f'<text x="330" y="130" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">sqrt(3) a = 2r+ + 2r-</text><text x="330" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">a = 2r-  (anions touch)</text><text x="330" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">r+/r- = sqrt(3) - 1 = 0.732</text><text x="330" y="230" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">NaCl (octahedral): 0.414</text><text x="330" y="260" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">ZnS (tetrahedral): 0.225</text>'
+    html = '<p>Anion: corners</p><p>Cation: body centre</p><p>sqrt(3) a = 2r<sup>+</sup> + 2r<sup>-</sup></p><p>a = 2r<sup>-</sup> (anions touch)</p><p class="hl">r<sup>+</sup>/r<sup>-</sup> = sqrt(3) - 1 = 0.732</p><p>NaCl (octahedral): 0.414</p><p>ZnS (tetrahedral): 0.225</p>'
     # edge arrow a
     s+=f'<line x1="80" y1="290" x2="250" y2="290" stroke="{INK}" stroke-width="1.5"/><line x1="80" y1="284" x2="80" y2="296" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="284" x2="250" y2="296" stroke="{INK}" stroke-width="1.5"/><text x="155" y="310" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">a = edge of the cube</text></svg>'
-    return s
+    return s, html
 
 def fig_perovskite():
-    s=svg_open(760,300)
+    s=svg_open(760,300,"0 0 400 300")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     # cube front (90,50)-(310,270), back offset (70,-40)
     s+=f'<rect x="90" y="50" width="220" height="220" fill="none" stroke="{INK}" stroke-width="2"/><line x1="90" y1="50" x2="160" y2="10" stroke="{INK}" stroke-width="1.5"/><line x1="310" y1="50" x2="380" y2="10" stroke="{INK}" stroke-width="1.5"/><line x1="90" y1="270" x2="160" y2="230" stroke="{INK}" stroke-width="1.5"/><line x1="310" y1="270" x2="380" y2="230" stroke="{INK}" stroke-width="1.5"/><line x1="160" y1="10" x2="380" y2="10" stroke="{INK}" stroke-width="1.5"/><line x1="380" y1="10" x2="380" y2="230" stroke="{INK}" stroke-width="1.5"/>'
@@ -158,8 +160,8 @@ def fig_perovskite():
     for (x,y) in [(90,50),(310,50),(90,270),(310,270),(160,10),(380,10),(160,230),(380,230)]: s+=f'<circle cx="{x}" cy="{y}" r="12" fill="{BLUE}"/>'
     for (x,y) in [(200,160),(270,120),(235,30),(235,250),(125,140),(345,140)]: s+=f'<circle cx="{x}" cy="{y}" r="11" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
     s+=f'<circle cx="235" cy="140" r="12" fill="{ACC}"/>'
-    s+=f'<text x="450" y="80" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Ca2+ corners: 8 x 1/8 = 1</text><text x="450" y="110" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">O2- face centres: 6 x 1/2 = 3</text><text x="450" y="140" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">Ti4+ body centre: 1</text><text x="450" y="180" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Formula: CaTiO3</text><text x="450" y="210" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Ti CN 6, Ca CN 12</text><text x="450" y="250" font-family="Source Sans 3, sans-serif" font-size="14" fill="{MUT}">Shift origin by (1/2,1/2,1/2):</text><text x="450" y="275" font-family="Source Sans 3, sans-serif" font-size="14" fill="{MUT}">Ca at centre, Ti at corners, O on edges.</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, '<p><span class="cat">Ca<sup>2+</sup> corners: 8 x 1/8 = 1</span></p><p>O<sup>2-</sup> face centres: 6 x 1/2 = 3</p><p><span class="hl">Ti<sup>4+</sup> body centre: 1</span></p><p>Formula: CaTiO<sub>3</sub></p><p>Ti CN 6, Ca CN 12</p><p><span class="mut">Shift origin by (1/2,1/2,1/2):</span></p><p><span class="mut">Ca at centre, Ti at corners, O on edges.</span></p>'
 
 def fig_tolerance():
     s=svg_open(760,320)
@@ -255,7 +257,7 @@ def fig_lattice():
     return s
 
 def fig_nacl_oct():
-    s=svg_open(760,300)
+    s=svg_open(760,300,"0 0 360 300")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     cx, cy = 220, 150
     for (x,y) in [(cx,60),(cx,240),(130,150),(310,150)]:
@@ -263,11 +265,11 @@ def fig_nacl_oct():
         s+=f'<circle cx="{x}" cy="{y}" r="20" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
     s+=f'<circle cx="{cx+55}" cy="{cy-45}" r="14" fill="none" stroke="{ACC}" stroke-width="1.5"/><circle cx="{cx-55}" cy="{cy+45}" r="14" fill="none" stroke="{ACC}" stroke-width="1.5"/>'
     s+=f'<circle cx="{cx}" cy="{cy}" r="12" fill="{BLUE}"/>'
-    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Cl- at the six corners of an octahedron</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">Na+ at the centre</text><text x="400" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Na+ is octahedrally surrounded</text><text x="400" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">by six Cl- ions: coordination 6:6</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, '<p><span class="cat">Cl<sup>-</sup> at the six corners of an octahedron</span></p><p><span class="hl">Na<sup>+</sup> at the centre</span></p><p>Na<sup>+</sup> is octahedrally surrounded</p><p>by six Cl<sup>-</sup> ions: coordination 6:6</p>'
 
 def fig_wurtzite():
-    s=svg_open(760,300)
+    s=svg_open(760,300,"0 0 360 300")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     def hexpts(cx, cy, r):
         return [(cx + r*dx, cy + r*dy) for dx, dy in [(1,0),(0.5,0.866),(-0.5,0.866),(-1,0),(-0.5,-0.866),(0.5,-0.866)]]
@@ -277,32 +279,32 @@ def fig_wurtzite():
     for a,b in zip(top, bot): s+=f'<line x1="{a[0]:.0f}" y1="{a[1]:.0f}" x2="{b[0]:.0f}" y2="{b[1]:.0f}" stroke="{INK}" stroke-width="1.5"/>'
     for (x,y) in top+bot: s+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="10" fill="#FFEDD5" stroke="{ACC}" stroke-width="1.5"/>'
     s+=f'<circle cx="250" cy="168" r="10" fill="{ACC}"/>'
-    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Wurtzite, ZnS: hexagonal prism</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">S2- in an hcp array</text><text x="400" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">Zn2+ in half the tetrahedral holes</text><text x="400" y="180" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Coordination 4:4, as in zinc blende</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, '<p>Wurtzite, ZnS: hexagonal prism</p><p><span class="cat">S<sup>2-</sup> in an hcp array</span></p><p><span class="hl">Zn<sup>2+</sup> in half the tetrahedral holes</span></p><p>Coordination 4:4, as in zinc blende</p>'
 
 def fig_fluorite():
-    s=svg_open(760,300)
+    s=svg_open(760,300,"0 0 360 300")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     # cube divided into 8 small cubes
     s+=f'<rect x="90" y="50" width="200" height="200" fill="none" stroke="{INK}" stroke-width="2"/><line x1="190" y1="50" x2="190" y2="250" stroke="{INK}" stroke-width="1"/><line x1="90" y1="150" x2="290" y2="150" stroke="{INK}" stroke-width="1"/>'
     s+=f'<line x1="90" y1="50" x2="140" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="50" x2="340" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="250" x2="340" y2="220" stroke="{INK}" stroke-width="1.5"/><line x1="140" y1="20" x2="340" y2="20" stroke="{INK}" stroke-width="1.5"/><line x1="340" y1="20" x2="340" y2="220" stroke="{INK}" stroke-width="1.5"/>'
     for (x,y) in [(90,50),(290,50),(90,250),(290,250),(190,150),(215,35),(315,135),(140,20),(340,20),(340,220)]: s+=f'<circle cx="{x}" cy="{y}" r="11" fill="{BLUE}"/>'
     for (x,y) in [(140,100),(240,100),(140,200),(240,200)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{ACC}"/>'
-    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Ca2+: corners and face centres</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">F-: centres of the eight small cubes</text><text x="400" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Ca2+ coordinated by 8 F-</text><text x="400" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">F- coordinated by 4 Ca2+: 8:4</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, '<p><span class="cat">Ca<sup>2+</sup>: corners and face centres</span></p><p><span class="hl">F<sup>-</sup>: centres of the eight small cubes</span></p><p>Ca<sup>2+</sup> coordinated by 8 F<sup>-</sup></p><p>F<sup>-</sup> coordinated by 4 Ca<sup>2+</sup>: 8:4</p>'
 
 def fig_rutile():
-    s=svg_open(760,300)
+    s=svg_open(760,300,"0 0 340 300")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     # tetragonal box: one side longer than the others
     s+=f'<rect x="120" y="50" width="130" height="200" fill="none" stroke="{INK}" stroke-width="2"/><line x1="120" y1="50" x2="160" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="50" x2="290" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="250" y1="250" x2="290" y2="225" stroke="{INK}" stroke-width="1.5"/><line x1="160" y1="25" x2="290" y2="25" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="25" x2="290" y2="225" stroke="{INK}" stroke-width="1.5"/>'
     for (x,y) in [(120,50),(250,50),(120,250),(250,250),(160,25),(290,25),(160,225),(290,225)]: s+=f'<circle cx="{x}" cy="{y}" r="10" fill="{BLUE}"/>'
     s+=f'<circle cx="185" cy="150" r="10" fill="{BLUE}"/><circle cx="150" cy="110" r="8" fill="{ACC}"/><circle cx="225" cy="190" r="8" fill="{ACC}"/>'
-    s+=f'<text x="360" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Rutile, TiO2: tetragonal cell</text><text x="360" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">Ti4+: corners and body centre</text><text x="360" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">O2-: inside the cell</text><text x="360" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Ti octahedral (6), O trigonal (3)</text><text x="360" y="220" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">One side longer: body-centred</text><text x="360" y="250" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">tetragonal, not cubic</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, '<p>Rutile, TiO<sub>2</sub>: tetragonal cell</p><p><span class="cat">Ti<sup>4+</sup>: corners and body centre</span></p><p><span class="hl">O<sup>2-</sup>: inside the cell</span></p><p>Ti octahedral (6), O trigonal (3)</p><p>One side longer: body-centred</p><p>tetragonal, not cubic</p>'
 
 def fig_diamond():
-    s=svg_open(760,300)
+    s=svg_open(760,300,"0 0 360 300")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     front=[(80,250),(280,250),(280,50),(80,50)]
     back=[(x+60,y-40) for x,y in front]
@@ -312,8 +314,8 @@ def fig_diamond():
     for p in front+back: s+=f'<circle cx="{p[0]}" cy="{p[1]}" r="9" fill="{INK}"/>'
     for (x,y) in [(180,150),(210,30),(310,130)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{BLUE}"/>'
     for (x,y) in [(220,170),(250,100),(130,200),(230,210)]: s+=f'<circle cx="{x}" cy="{y}" r="9" fill="{ACC}"/>'
-    s+=f'<text x="400" y="90" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">Diamond cubic: an fcc lattice</text><text x="400" y="120" font-family="Source Sans 3, sans-serif" font-size="15" fill="{ACC}">4 more atoms inside the cell</text><text x="400" y="150" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">at 4 of the 8 tetrahedral holes</text><text x="400" y="190" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">8 atoms per cell, CN 4, 34% filled</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, '<p>Diamond cubic: an fcc lattice</p><p class="hl">4 more atoms inside the cell</p><p>at 4 of the 8 tetrahedral holes</p><p>8 atoms per cell, CN 4, 34% filled</p>'
 
 def fig_bcc_layers():
     s=svg_open(760,300)
@@ -325,10 +327,10 @@ def fig_bcc_layers():
     for r in range(4):
         for c in range(4): s+=f'<circle cx="{430+16+c*32}" cy="{76+r*32}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
     s+=f'<text x="420" y="230" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Second layer sits in the notches</text></svg>'
-    return s
+    return split2(s, 760, 300)
 
 def fig_hcp_prism():
-    s=svg_open(760,340)
+    s=svg_open(760,340,"0 0 400 340")
     s+=f'<rect width="760" height="340" fill="{PAPER}"/>'
     def hexpts(cx, cy, r):
         return [(cx + r*dx, cy + r*dy) for dx, dy in [(1,0),(0.5,0.866),(-0.5,0.866),(-1,0),(-0.5,-0.866),(0.5,-0.866)]]
@@ -336,30 +338,48 @@ def fig_hcp_prism():
     poly=lambda pts: " ".join(f"{x:.0f},{y:.0f}" for x,y in pts)
     s+=f'<polygon points="{poly(top)}" fill="none" stroke="{INK}" stroke-width="2"/><polygon points="{poly(bot)}" fill="none" stroke="{INK}" stroke-width="2"/>'
     for a,b in zip(top, bot): s+=f'<line x1="{a[0]:.0f}" y1="{a[1]:.0f}" x2="{b[0]:.0f}" y2="{b[1]:.0f}" stroke="{INK}" stroke-width="1.5"/>'
-    s+=f'<text x="400" y="70" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">A: third layer, top</text><text x="400" y="160" font-family="Source Sans 3, sans-serif" font-size="15" fill="{BLUE}">B: second layer, middle</text><text x="400" y="250" font-family="Source Sans 3, sans-serif" font-size="15" fill="{INK}">A: first layer, bottom</text>'
+    html = '<p>A: third layer, top</p><p><span class="cat">B: second layer, middle</span></p><p>A: first layer, bottom</p>'
     s+=f'<line x1="150" y1="30" x2="290" y2="30" stroke="{INK}" stroke-width="1.5"/><line x1="150" y1="24" x2="150" y2="36" stroke="{INK}" stroke-width="1.5"/><line x1="290" y1="24" x2="290" y2="36" stroke="{INK}" stroke-width="1.5"/><text x="205" y="20" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">a</text>'
     s+=f'<line x1="60" y1="90" x2="60" y2="230" stroke="{INK}" stroke-width="1.5"/><line x1="54" y1="90" x2="66" y2="90" stroke="{INK}" stroke-width="1.5"/><line x1="54" y1="230" x2="66" y2="230" stroke="{INK}" stroke-width="1.5"/><text x="45" y="165" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">c</text>'
-    for (x,y) in [(480,300),(520,300),(500,265)]: s+=f'<circle cx="{x}" cy="{y}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
-    s+=f'<text x="560" y="305" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">B: three spheres, a triangle</text></svg>'
-    return s
+    for (x,y) in [(120,315),(160,315),(140,285)]: s+=f'<circle cx="{x}" cy="{y}" r="14" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
+    s+=f'<text x="180" y="310" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">B: three spheres, a triangle</text></svg>'
+    return s, html
 
 def fig_ccp12():
-    s=svg_open(760,430)
+    s=svg_open(760,430,"0 0 480 430")
     s+=f'<rect width="760" height="430" fill="{PAPER}"/>'
     for (x,y,n) in [(352,52,"7"),(408,52,"8"),(380,98,"9")]:
         s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{n}</text>'
-    s+=f'<text x="450" y="75" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">A layer, above</text>'
+    html = '<p>A layer, above</p>'
     for i,(x,y) in enumerate([(380,178),(434,209),(434,271),(380,302),(326,271),(326,209)]):
         s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{i+1}</text>'
     s+=f'<text x="380" y="245" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="16" fill="{ACC}">★</text>'
-    s+=f'<text x="470" y="245" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">B layer: six around the centre</text>'
+    html += '<p>B layer: six around the centre</p>'
     for (x,y,n) in [(352,372,"10"),(408,372,"11"),(380,410,"12")]:
         s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{n}</text>'
-    s+=f'<text x="450" y="380" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">C layer, below</text></svg>'
-    return s
+    s+=f'</svg>'
+    return s, html + '<p>C layer, below</p>'
 
 # ---- template ----
+def responsive_tables(html):
+    # label every table cell with its column header so mobile can stack rows as cards
+    def fix_table(m):
+        table = m.group(0)
+        heads = [_re.sub(r"<[^>]+>", "", h).strip() for h in _re.findall(r"<th[^>]*>(.*?)</th>", table)]
+        def fix_row(rm):
+            cells = _re.findall(r"<td([^>]*)>(.*?)</td>", rm.group(0))
+            if not cells:
+                return rm.group(0)
+            out = "<tr>"
+            for i, (attrs, content) in enumerate(cells):
+                label = heads[i] if i < len(heads) else ""
+                out += f'<td{attrs} data-label="{label}">{content}</td>'
+            return out + "</tr>"
+        return _re.sub(r"<tr>.*?</tr>", fix_row, table, flags=_re.S)
+    return _re.sub(r"<table>.*?</table>", fix_table, html, flags=_re.S)
+
 def page(rel, title, lede, body, crumb=""):
+    body = responsive_tables(body)
     depth = rel.count("/")
     cls = "home" if rel == "index.html" else "page"
     def hero_cube(x0, label, kind, delay=0):
@@ -411,6 +431,9 @@ def page(rel, title, lede, body, crumb=""):
 </div>
 <script src="{prefix}assets/search.js" defer></script>
 <script src="{prefix}assets/toc.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="{prefix}assets/motion.js" defer></script>
 </body>
 </html>
 """
@@ -432,7 +455,7 @@ def check_box(title, text):
 
 # ---- Chapter 1 topic bodies ----
 B01 = f"""
-{fig("Regular order against irregular order. The drawing is a schematic, not a photograph of atoms.", fig_order())}
+{fig_pair("Regular order against irregular order. The drawing is a schematic, not a photograph of atoms.", *fig_order())}
 <h2>Crystalline</h2>
 <ul><li>Definite, repeating, long range order of particles.</li><li>Definite characteristic shape.</li><li>Sharp and fixed melting point.</li><li>Breaks along a definite plane, giving smooth surfaces.</li><li>A definite value of heat of fusion.</li></ul>
 <p>Examples: NaCl, diamond.</p>
@@ -441,7 +464,7 @@ B01 = f"""
 <p>Examples: glass, rubber, pitch.</p>
 """
 B02 = f"""
-{fig("The six lattice parameters: three edge lengths and three angles between them.", fig_axes())}
+{fig_side("The six lattice parameters: three edge lengths and three angles between them.", *fig_axes())}
 {fig("The crystal is built by stacking unit cells together, one highlighted here.", fig_lattice())}
 <h2>Lattice and unit cells</h2>
 <p>A crystal consists of a basic structural unit, or motif, repeated in three dimensions. The basic unit may be a single atom, molecule or ion, or a group of atoms or molecules, which has an identical environment throughout the crystal. It is also called the basis of the crystal. A basis has the same stoichiometric composition as the crystal itself.</p>
@@ -474,13 +497,13 @@ B03 = """
 <p>The lattice counts add to 14 Bravais lattices in total: 3 + 2 + 4 + 2 + 1 + 1 + 1 = 14.</p>
 """
 B04 = f"""
-{fig("Simple cubic: one atom per cell. The cube is a schematic; atoms are drawn as points, not to scale.", cube_svg("sc","Simple cubic (primitive)"))}
+{fig_side("Simple cubic: one atom per cell. The cube is a schematic; atoms are drawn as points, not to scale.", *cube_svg("sc","Simple cubic (primitive)"))}
 <p>In a simple or primitive cubic lattice the atoms are present at all eight corners of the unit cell. Each corner is shared by eight adjacent cubic cells, so each corner contributes 1/8 of an atom.</p>
 <div class="formula">8 corners × 1/8 = 1 atom per unit cell</div>
-{fig("Body-centred cubic: the centre atom belongs entirely to this cell.", cube_svg("bcc","Body-centred cubic"))}
+{fig_side("Body-centred cubic: the centre atom belongs entirely to this cell.", *cube_svg("bcc","Body-centred cubic"))}
 <p>In a body-centred cubic lattice the atoms are at all the corners and at the centre of the unit cell. The centre atom is not shared by any other cell.</p>
 <div class="formula">8 × 1/8 + 1 = 2 atoms per unit cell</div>
-{fig("Face-centred cubic: 14 lattice points in the cell, 4 atoms per cell after sharing is counted.", cube_svg("fcc","Face-centred cubic"))}
+{fig_side("Face-centred cubic: 14 lattice points in the cell, 4 atoms per cell after sharing is counted.", *cube_svg("fcc","Face-centred cubic"))}
 <p>In a face-centred cubic lattice the atoms are at all eight corners and at the centre of each face. There is no atom at the centre of the cube. Each face-centre atom is shared by two adjacent cells, so it contributes 1/2.</p>
 <div class="formula">Corners: 8 × 1/8 = 1<br>Faces: 6 × 1/2 = 3<br>Total = 4 atoms per unit cell</div>
 """
@@ -499,17 +522,17 @@ B06 = f"""
 <ul><li><strong>If the third layer repeats the first,</strong> there are only two kinds of layer, A and B, and the pattern is ABAB… This is the hexagonal close-packed (hcp) structure.</li>
 <li><strong>If the third layer does not repeat the first,</strong> it is denoted C, and the pattern is ABCABC… This is the cubic close-packed (ccp) structure, also called face-centred cubic (fcc).</li></ul>
 <h2>Hexagonal close packing</h2>
-{fig("The hexagonal unit cell: A layers top and bottom, B layer in the middle.", fig_hcp_prism())}
+{fig_side("The hexagonal unit cell: A layers top and bottom, B layer in the middle.", *fig_hcp_prism())}
 <p>This is the relation between the simple hexagonal crystal system and the hexagonal close-packing model. In ABA stacking, the seven spheres in both the first layer (A) and the third layer occupy simple hexagonal lattice points, while the three spheres of the second layer (B) are placed (within the unit cell) at the corners of an equilateral triangle midway between the two parallel hexagonal planes, so that the nearest environment of every sphere becomes identical. The height of the unit cell, c, is the distance between the first and third layers; a is the length of the side of the hexagon.</p>
 <p>A sphere is hexagonally surrounded by six spheres in its own plane, and touches three spheres below the plane and three above it. Coordination number = 6 + 3 + 3 = 12.</p>
 <p class="figures">Packing efficiency 74%, coordination number 12, stacking ABAB and so on.</p>
 <h2>Cubic close packing</h2>
-{fig("The 12 nearest neighbours of one sphere: three above, six around it, three below.", fig_ccp12())}
+{fig_side("The 12 nearest neighbours of one sphere: three above, six around it, three below.", *fig_ccp12())}
 <p>In ccp / fcc the stacking sequence is ABCABC… The structure has cubic symmetry. In addition to the eight spheres at the eight corners of the cube, there is one sphere at the centre of each of the six faces, hence the name face-centred cubic. Each sphere is surrounded by 12 other nearest spheres, so the coordination number is 12. Packing efficiency is 74%.</p>
 <h2>Common features of hcp and ccp</h2>
 <ul><li>Coordination number is 12 in both.</li><li>Packing efficiency is 74% in both, 74% of the total volume of the unit cell is occupied by the spheres.</li></ul>
 <h2>Body-centred cubic, for comparison</h2>
-{fig("BCC layers: the second layer sits in the notches of the first.", fig_bcc_layers())}
+{fig_pair("BCC layers: the second layer sits in the notches of the first.", *fig_bcc_layers())}
 <p>Another common arrangement in a few metals is body-centred cubic (bcc). The second layer sits in the notches of the first and the pattern repeats ABAB…, but the coordination number is 8, compared with 12 in a close-packed pattern.</p>
 """ + check_box("A line to read with care", "The notes say, in the bcc paragraph, that the number of neighbours around any sphere is four. That is the in-plane count in the drawing, not the coordination number of bcc. The coordination number of bcc is 8, as the notes themselves state in the next sentence.")
 
@@ -521,7 +544,7 @@ B07 = f"""
 <tr><td>Octahedral</td><td>Six spheres at the corners of an octahedron</td><td class="num">1</td><td class="num">0.414 R</td></tr>
 </tbody></table>
 <p>R is the radius of the packed sphere. An fcc unit cell has 4 atoms, so it has 8 tetrahedral voids and 4 octahedral voids.</p>
-{fig("CsCl geometry: the cation touches anions along the body diagonal.", fig_radius())}
+{fig_side("CsCl geometry: the cation touches anions along the body diagonal.", *fig_radius())}
 <h2>Radius ratio rule</h2>
 <p>The radius ratio r<sup>+</sup>/r<sup>−</sup> predicts which hole a cation occupies, and therefore its coordination number. The limits are the ratios at which the cation just touches the surrounding anions.</p>
 <table><thead><tr><th class="num">r<sup>+</sup>/r<sup>−</sup></th><th class="num">Coordination</th><th>Geometry</th><th>Example</th></tr></thead><tbody>
@@ -536,7 +559,7 @@ B07 = f"""
 """ + check_box("Checked, with one correction to the working", "The three limiting values, 0.225, 0.414 and 0.732, are correct and match the standard radius-ratio table. The tetrahedral algebra in the notes is heavily crossed out, and its last legible step gives 0.449, not 0.225, so this page gives the standard working instead. The radius-ratio rule is a guide, not a law. That last sentence is standard knowledge supplied here, because the notes' own limitation item is cut off at the bottom of the page.")
 
 B08 = f"""
-{fig("Diamond cubic: an fcc lattice with four extra atoms inside the cell.", fig_diamond())}
+{fig_side("Diamond cubic: an fcc lattice with four extra atoms inside the cell.", *fig_diamond())}
 <h2>Diamond cubic unit cell</h2>
 <p>Diamond is a special type of fcc lattice. Four additional atoms are present within the face-centred cube, distributed symmetrically so that each one has an identical environment. They sit at the centres of alternating small cubes within the fcc cell, that is, at 4 of the 8 alternative tetrahedral holes. In this arrangement every atom is tetrahedrally surrounded.</p>
 <p>Total lattice points per diamond cubic unit cell:</p>
@@ -550,7 +573,7 @@ B08 = f"""
 """
 
 B09 = f"""
-{fig("NaCl: each Na+ sits in an octahedron of six Cl- ions.", fig_nacl_oct())}
+{fig_side("NaCl: each Na+ sits in an octahedron of six Cl- ions.", *fig_nacl_oct())}
 <h2>AB type, four structures</h2>
 <p>NaCl, CsCl, ZnS (zinc blende) and ZnS (wurtzite).</p>
 <table><thead><tr><th>Structure</th><th class="num">Coordination</th><th>Anion array</th><th>Cation site</th></tr></thead><tbody>
@@ -560,14 +583,14 @@ B09 = f"""
 <tr><td><strong>ZnS, wurtzite</strong></td><td class="num">4:4</td><td>hcp S<sup>2−</sup></td><td>Zn<sup>2+</sup> in half the tetrahedral holes</td></tr>
 </tbody></table>
 <p>Zinc blende and wurtzite have the same 4:4 coordination and the same stoichiometry; they differ in the stacking of the anion array, ccp in zinc blende, hcp in wurtzite.</p>
-{fig("Wurtzite, ZnS: the same 4:4 coordination in a hexagonal cell.", fig_wurtzite())}
+{fig_side("Wurtzite, ZnS: the same 4:4 coordination in a hexagonal cell.", *fig_wurtzite())}
 """
 B10 = f"""
-{fig("Fluorite, CaF2: Ca2+ on corners and faces, F- in the eight small cubes.", fig_fluorite())}
+{fig_side("Fluorite, CaF2: Ca2+ on corners and faces, F- in the eight small cubes.", *fig_fluorite())}
 <h2>Fluorite, CaF<sub>2</sub>, 8:4</h2>
 <p>Ca<sup>2+</sup> ions are arranged at the corners and at the centres of the faces of a cubic unit cell, and F<sup>−</sup> ions are at the centres of the eight small cubes into which the cell may be divided. Each Ca<sup>2+</sup> is coordinated by 8 F<sup>−</sup> neighbours at the corners of a cube, while each F<sup>−</sup> has 4 Ca<sup>2+</sup> neighbours.</p>
 <p>This is the only structure in the notes with 8:4 coordination. The reverse structure, antifluorite, is taken by oxides such as Li<sub>2</sub>O and Na<sub>2</sub>O, with the cation and anion positions exchanged. (Standard material added here; it is not in the notes.)</p>
-{fig("Rutile, TiO2: a tetragonal cell, one side longer than the others.", fig_rutile())}
+{fig_side("Rutile, TiO2: a tetragonal cell, one side longer than the others.", *fig_rutile())}
 <h2>Rutile, TiO<sub>2</sub>, 6:3</h2>
 <p>The unit cell of the rutile lattice is a given figure. The cation is octahedrally surrounded by six anions, while the anion (O<sup>2−</sup>) is trigonally surrounded by three cations. Rutile has a low-symmetry anion sublattice that fits neither a simple cubic nor an fcc lattice. The cation sublattice is a distorted body-centred cube, because one side of the cube differs from the others, the cation sublattice is actually body-centred tetragonal. The unit cell is tetragonal.</p>
 """
@@ -585,7 +608,7 @@ B11 = f"""
 """ + check_box("A question in the margin of the notes", "The notes also ask, in a line of their own: n-type, p-type, semiconductor, see note. The note it points to is not in the uploaded pages, so it is kept here as an open question. The notes ask why a KCl crystal looks violet in excess potassium, while excess lithium makes LiCl pink. That is an F-centre (colour centre): excess metal gives electrons trapped in anion vacancies, and the trapped electron absorbs visible light. The colour depends on the size of the vacancy, hence on the host crystal, violet in KCl, pink in LiCl. The notes mark this as a question to return to, so it is kept as a question here, with the standard answer given.")
 
 B12 = f"""
-{fig("Perovskite CaTiO3: Ca on the corners, O on the face centres, Ti at the body centre.", fig_perovskite())}
+{fig_side("Perovskite CaTiO3: Ca on the corners, O on the face centres, Ti at the body centre.", *fig_perovskite())}
 <h2>Perovskite, CaTiO<sub>3</sub></h2>
 <p>Named after the mineral CaTiO<sub>3</sub>. O<sup>2−</sup> ions, along with the larger cation (Ca<sup>2+</sup>), form a ccp and fcc array in which the octahedral holes formed by O<sup>2−</sup> are occupied by the smaller cation (Ti<sup>4+</sup>). In the unit cell, the eight corners of the cube are occupied by Ca<sup>2+</sup>, O<sup>2−</sup> are placed at the centres of the six faces, and Ti<sup>4+</sup> is placed at the centre of the cube.</p>
 <div class="formula">Ca2+: 8 × 1/8 = 1<br>O2−: 6 × 1/2 = 3<br>Ti4+: 1<br>CaTiO<sub>3</sub></div>
