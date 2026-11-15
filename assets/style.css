@@ -34,9 +34,9 @@ h1, h2, h3 { font-family: var(--font-display); }
 .hero-field { margin-top: calc(-1 * var(--space-lg)); }
 
 /* chapter index: rows in a run, parted by space and a change of paper, no boxes */
-.chapter-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-xl); }
-.chapter-list li { display: flex; justify-content: space-between; gap: var(--gap-columns); align-items: baseline; flex-wrap: wrap; padding: var(--space-xl); background: var(--color-paper-2); }
-.chapter-list li:first-child { background: var(--color-field); color: var(--color-field-ink); }
+.chapter-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+.chapter-list li { display: flex; justify-content: space-between; gap: var(--gap-columns); align-items: baseline; flex-wrap: wrap; padding: var(--space-lg) var(--space-xl); background: var(--color-paper-2); }
+.chapter-list li:first-child { grid-column: 1 / -1; background: var(--color-field); color: var(--color-field-ink); }
 .chapter-list li:first-child p { color: var(--color-field-ink); }
 .chapter-list li:first-child .status { color: var(--color-field-ink); }
 .chapter-list h2 { font-size: var(--text-section); line-height: 1; letter-spacing: var(--tracking-display); }
@@ -83,4 +83,5 @@ footer a { font-weight: 500; }
 @media (max-width: 60rem) {
   .quote { margin-left: 0; }
   .field { padding: var(--space-xl) var(--space-md); }
+  .chapter-list { grid-template-columns: 1fr; }
 }
