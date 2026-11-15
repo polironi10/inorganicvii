@@ -40,10 +40,10 @@ def cube_svg(kind="sc", title=""):
 def fig(caption, inner):
     return f'<figure>{inner}<figcaption>{caption}</figcaption></figure>'
 
-def split2(s, w=760, h=300, cut=380):
+def split2(s, w=760, h=300, cut=380, vb_b=None):
     # one SVG with two drawings side by side -> two SVGs, left and right halves
     a = s.replace(f'viewBox="0 0 {w} {h}"', f'viewBox="0 0 {cut} {h}"', 1)
-    b = s.replace(f'viewBox="0 0 {w} {h}"', f'viewBox="{cut} 0 {w-cut} {h}"', 1)
+    b = s.replace(f'viewBox="0 0 {w} {h}"', f'viewBox="{vb_b}"' if vb_b else f'viewBox="{cut} 0 {w-cut} {h}"', 1)
     return a, b
 
 def fig_pair(caption, inner_a, inner_b):
@@ -88,7 +88,7 @@ def fig_packing():
         off=20 if r%2 else 0
         for c in range(4): s+=f'<circle class="anim-drop" style="animation-delay:{r*120}ms" cx="{430+off+c*40}" cy="{180+r*35}" r="20" fill="none" stroke="{BLUE}" stroke-width="1.5"/>'
     s+=f'<text x="420" y="310" font-family="Source Sans 3, sans-serif" font-size="14" fill="{INK}">Hexagonal ABAB: CN = 6</text></svg>'
-    return split2(s, 760, 320)
+    return split2(s, 760, 320, 380, "380 150 380 170")
 
 def fig_stacking():
     s=svg_open(760,340)
@@ -132,7 +132,7 @@ def fig_voids():
     return split2(s, 760, 320)
 
 def fig_radius():
-    s=svg_open(760,320,"0 0 320 320")
+    s=svg_open(760,320,"0 0 340 320")
     s+=f'<rect width="760" height="320" fill="{PAPER}"/>'
     # 3D cube: front (80,90)-(250,260), back offset (60,-45)
     front=[(80,260),(250,260),(250,90),(80,90)]
@@ -150,7 +150,7 @@ def fig_radius():
     return s, html
 
 def fig_perovskite():
-    s=svg_open(760,300,"0 0 400 300")
+    s=svg_open(760,300,"0 -10 400 310")
     s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
     # cube front (90,50)-(310,270), back offset (70,-40)
     s+=f'<rect x="90" y="50" width="220" height="220" fill="none" stroke="{INK}" stroke-width="2"/><line x1="90" y1="50" x2="160" y2="10" stroke="{INK}" stroke-width="1.5"/><line x1="310" y1="50" x2="380" y2="10" stroke="{INK}" stroke-width="1.5"/><line x1="90" y1="270" x2="160" y2="230" stroke="{INK}" stroke-width="1.5"/><line x1="310" y1="270" x2="380" y2="230" stroke="{INK}" stroke-width="1.5"/><line x1="160" y1="10" x2="380" y2="10" stroke="{INK}" stroke-width="1.5"/><line x1="380" y1="10" x2="380" y2="230" stroke="{INK}" stroke-width="1.5"/>'
@@ -348,14 +348,14 @@ def fig_hcp_prism():
 def fig_ccp12():
     s=svg_open(760,430,"0 0 480 430")
     s+=f'<rect width="760" height="430" fill="{PAPER}"/>'
-    for (x,y,n) in [(352,52,"7"),(408,52,"8"),(380,98,"9")]:
+    for (x,y,n) in [(202,52,"7"),(258,52,"8"),(230,98,"9")]:
         s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{n}</text>'
     html = '<p>A layer, above</p>'
-    for i,(x,y) in enumerate([(380,178),(434,209),(434,271),(380,302),(326,271),(326,209)]):
+    for i,(x,y) in enumerate([(230,178),(284,209),(284,271),(230,302),(176,271),(176,209)]):
         s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{i+1}</text>'
-    s+=f'<text x="380" y="245" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="16" fill="{ACC}">★</text>'
+    s+=f'<text x="230" y="245" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="16" fill="{ACC}">★</text>'
     html += '<p>B layer: six around the centre</p>'
-    for (x,y,n) in [(352,372,"10"),(408,372,"11"),(380,410,"12")]:
+    for (x,y,n) in [(202,372,"10"),(258,372,"11"),(230,410,"12")]:
         s+=f'<circle cx="{x}" cy="{y}" r="18" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="13" fill="{INK}">{n}</text>'
     s+=f'</svg>'
     return s, html + '<p>C layer, below</p>'
