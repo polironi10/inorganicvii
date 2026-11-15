@@ -5,11 +5,11 @@ Production URL: https://inorganicvii.pages.dev
 
 ## Structure
 
-- `index.html`, chapter list
-- `chapters/01-solid-state/`, 14 topic pages, transcribed from the 23-page PDF
-- `chapters/02-…/06-…/`, planned chapters, awaiting notes
-- `sources.html`, verification log
-- `assets/style.css`, Hallmark Grid theme
+- `index.html`, chapter list (4 syllabus chapters)
+- `chapters/04-solids/`, 6 section pages, transcribed from the 23-page PDF
+- `chapters/01-bonding-quantum/`, `02-elements-coordination/`, `03-organometallic/`, upload soon
+- `sources.html`, verification log and syllabus coverage
+- `assets/style.css`, site theme
 
 ## Deploy to Cloudflare Pages
 
