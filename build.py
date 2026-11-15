@@ -5,7 +5,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 def svg_open(w=760, h=300, vb=None):
     vb = vb or f"0 0 {w} {h}"
-    return f'<svg viewBox="{vb}" width="{w}" height="{h}" role="img" xmlns="http://www.w3.org/2000/svg">'
+    return f'<svg viewBox="{vb}" role="img" xmlns="http://www.w3.org/2000/svg">'
 INK="#20242B"; MUT="#5A6470"; ACC="#C2410C"; PAPER="#FFFFFF"; BLUE="#0E7490"; GREEN="#0E7490"; AMBER="#C2410C"
 
 def cube_svg(kind="sc", title=""):
