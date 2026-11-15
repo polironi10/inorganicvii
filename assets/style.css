@@ -66,6 +66,10 @@ main h3 { margin-top: var(--space-xl); margin-bottom: var(--space-sm); }
 figure { margin: var(--space-2xl) 0; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-lg); overflow-x: auto; }
 figure svg { width: 100%; height: auto; min-width: 520px; }
 figcaption { font-size: 0.875rem; color: var(--muted); margin-top: var(--space-md); }
+.fig-pair { display: flex; gap: var(--space-lg); }
+.fig-pair svg { flex: 1 1 0; width: auto; min-width: 0; }
+.hero-cubes { display: flex; gap: var(--space-lg); flex-wrap: wrap; justify-content: space-around; }
+.hero-cubes svg { flex: 1 1 160px; width: auto; min-width: 0; max-width: 220px; }
 .formula { background: var(--ink); color: var(--paper); font-family: var(--font-display); font-size: 1.25rem; line-height: 1.4; padding: var(--space-lg); margin: var(--space-lg) 0; border-radius: var(--radius-card); overflow-x: auto; }
 .figures { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.4; margin: var(--space-lg) 0; font-variant-numeric: tabular-nums; }
 .note { margin: var(--space-lg) 0; border: 1px solid var(--rule); border-radius: var(--radius-card); padding: var(--space-md) var(--space-lg); }
@@ -100,8 +104,6 @@ footer a { font-weight: 600; }
 .hero h1 { animation: enter 500ms var(--ease-out) both; }
 .hero .lede { animation: enter 500ms var(--ease-out) 120ms both; }
 .hero-field .cube { animation: bob 6s ease-in-out infinite; transform-box: fill-box; }
-.hero-field .cube:nth-child(2) { animation-delay: 0.6s; }
-.hero-field .cube:nth-child(3) { animation-delay: 1.2s; }
 figure svg .anim-drop { animation: drop 500ms var(--ease-out) both; transform-box: fill-box; }
 figure svg .anim-line { animation: drawline 500ms var(--ease-out) both; transform-box: fill-box; transform-origin: left center; }
 figure svg .anim-pulse { animation: pulse 2.8s ease-in-out infinite; }
@@ -109,6 +111,7 @@ figure svg .anim-pulse { animation: pulse 2.8s ease-in-out infinite; }
 
 /* ---- mobile ---- */
 @media (max-width: 60rem) {
+  .fig-pair { flex-direction: column; }
   .quote { font-size: 1.25rem; }
   figure { padding: var(--space-md); }
   .formula { font-size: 1.125rem; padding: var(--space-md); }
