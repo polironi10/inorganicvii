@@ -138,24 +138,38 @@ def fig_tolerance():
     return s
 
 def fig_cfse():
-    s=svg_open(760,340)
-    s+=f'<rect width="760" height="340" fill="{PAPER}"/>'
+    s=svg_open(760,300)
+    s+=f'<rect width="760" height="300" fill="{PAPER}"/>'
+    d_o = 'Δ<tspan baseline-shift="sub" font-size="11">o</tspan>'
+    d_t = 'Δ<tspan baseline-shift="sub" font-size="11">t</tspan>'
     # octahedral levels
-    s+=f'<text x="80" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Octahedral</text><line x1="80" y1="90" x2="240" y2="90" stroke="{ACC}" stroke-width="3"/><line x1="80" y1="190" x2="240" y2="190" stroke="{ACC}" stroke-width="3"/><text x="260" y="95" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">eg (+0.6 Delt_o)</text><text x="260" y="195" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">t2g (-0.4 Delt_o)</text><text x="80" y="140" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Delt_o</text>'
-    s+=f'<text x="80" y="260" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">d3: t2g3, CFSE = 1.2 Delt_o</text><text x="80" y="285" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">d5 high spin: CFSE = 0</text>'
-    # tetrahedral levels (inverted)
-    s+=f'<text x="480" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Tetrahedral</text><line x1="480" y1="90" x2="640" y2="90" stroke="{BLUE}" stroke-width="3"/><line x1="480" y1="150" x2="640" y2="150" stroke="{BLUE}" stroke-width="3"/><text x="480" y="115" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">t2 (+0.4 Delt_t)</text><text x="480" y="175" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">e (-0.6 Delt_t)</text><text x="480" y="260" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Delt_t = 4/9 Delt_o</text><text x="480" y="285" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Splitting is inverted</text><text x="480" y="310" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">and smaller than oct.</text></svg>'
+    s+=f'<text x="60" y="36" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Octahedral</text>'
+    s+=f'<line x1="60" y1="80" x2="220" y2="80" stroke="{ACC}" stroke-width="3"/><line x1="60" y1="170" x2="220" y2="170" stroke="{ACC}" stroke-width="3"/>'
+    s+=f'<text x="235" y="85" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">e<tspan baseline-shift="sub" font-size="11">g</tspan> (+0.6 {d_o})</text>'
+    s+=f'<text x="235" y="175" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">t<tspan baseline-shift="sub" font-size="11">2g</tspan> (-0.4 {d_o})</text>'
+    s+=f'<line x1="330" y1="80" x2="330" y2="170" stroke="{INK}" stroke-width="1.5"/><line x1="324" y1="80" x2="330" y2="80" stroke="{INK}" stroke-width="1.5"/><line x1="324" y1="170" x2="330" y2="170" stroke="{INK}" stroke-width="1.5"/><text x="342" y="130" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{d_o}</text>'
+    s+=f'<text x="60" y="235" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">d<tspan baseline-shift="super" font-size="11">3</tspan>: t<tspan baseline-shift="sub" font-size="11">2g</tspan><tspan baseline-shift="super" font-size="11">3</tspan>, CFSE = 1.2 {d_o}</text>'
+    s+=f'<text x="60" y="262" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">d<tspan baseline-shift="super" font-size="11">5</tspan> high spin: CFSE = 0</text>'
+    # tetrahedral levels (inverted, smaller gap)
+    s+=f'<text x="460" y="36" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Tetrahedral</text>'
+    s+=f'<line x1="460" y1="100" x2="620" y2="100" stroke="{BLUE}" stroke-width="3"/><line x1="460" y1="150" x2="620" y2="150" stroke="{BLUE}" stroke-width="3"/>'
+    s+=f'<text x="460" y="88" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">t<tspan baseline-shift="sub" font-size="10">2</tspan> (+0.4 {d_t})</text>'
+    s+=f'<text x="460" y="178" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">e (-0.6 {d_t})</text>'
+    s+=f'<line x1="660" y1="100" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="100" x2="660" y2="100" stroke="{INK}" stroke-width="1.5"/><line x1="654" y1="150" x2="660" y2="150" stroke="{INK}" stroke-width="1.5"/><text x="672" y="130" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{d_t}</text>'
+    s+=f'<text x="460" y="235" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">{d_t} = 4/9 {d_o}</text>'
+    s+=f'<text x="460" y="262" font-family="Radio Canada, sans-serif" font-size="14" fill="{INK}">Splitting is inverted and smaller</text></svg>'
     return s
 
 def fig_spinel():
-    s=svg_open(760,320)
-    s+=f'<rect width="760" height="320" fill="{PAPER}"/>'
-    s+=f'<text x="60" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Normal spinel (A)tet(B)2oct O4</text>'
+    s=svg_open(760,290)
+    s+=f'<rect width="760" height="290" fill="{PAPER}"/>'
+    sub = lambda x: f'<tspan baseline-shift="sub" font-size="11">{x}</tspan>'
+    s+=f'<text x="60" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Normal spinel (A){sub("tet")}(B){sub("2oct")}O{sub("4")}</text>'
     for (x,y,lab) in [(120,120,"A2+"),(200,120,"B3+"),(280,120,"B3+")]: s+=f'<circle cx="{x}" cy="{y}" r="26" fill="none" stroke="{INK}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="12" fill="{INK}">{lab}</text>'
-    s+=f'<text x="60" y="180" font-family="Radio Canada, sans-serif" font-size="13" fill="{MUT}">Td hole (1/8 filled) - Oct holes (1/2 filled)</text><text x="60" y="210" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">MgAl2O4, ZnFe2O4, Mn3O4</text>'
-    s+=f'<text x="420" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Inverse spinel B(AB)O4</text>'
+    s+=f'<text x="60" y="180" font-family="Radio Canada, sans-serif" font-size="13" fill="{MUT}">Td hole (1/8 filled) - Oct holes (1/2 filled)</text><text x="60" y="210" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">MgAl{sub("2")}O{sub("4")}, ZnFe{sub("2")}O{sub("4")}, Mn{sub("3")}O{sub("4")}</text>'
+    s+=f'<text x="420" y="40" font-family="Radio Canada, sans-serif" font-size="15" fill="{INK}">Inverse spinel B(AB)O{sub("4")}</text>'
     for (x,y,lab) in [(480,120,"B3+"),(560,120,"A2+"),(640,120,"B3+")]: s+=f'<circle cx="{x}" cy="{y}" r="26" fill="none" stroke="{BLUE}" stroke-width="1.5"/><text x="{x}" y="{y+5}" text-anchor="middle" font-family="Radio Canada, sans-serif" font-size="12" fill="{INK}">{lab}</text>'
-    s+=f'<text x="420" y="180" font-family="Radio Canada, sans-serif" font-size="13" fill="{MUT}">Td: B3+ - Oct: A2+ + B3+</text><text x="420" y="210" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">Fe3O4, CoFe2O4, NiFe2O4</text><text x="60" y="270" font-family="Radio Canada, sans-serif" font-size="14" fill="{ACC}">O2- forms a ccp / fcc array in both cases.</text></svg>'
+    s+=f'<text x="420" y="180" font-family="Radio Canada, sans-serif" font-size="13" fill="{MUT}">Td: B3+ - Oct: A2+ + B3+</text><text x="420" y="210" font-family="Radio Canada, sans-serif" font-size="13" fill="{INK}">Fe{sub("3")}O{sub("4")}, CoFe{sub("2")}O{sub("4")}, NiFe{sub("2")}O{sub("4")}</text><text x="60" y="262" font-family="Radio Canada, sans-serif" font-size="14" fill="{ACC}">O2- forms a ccp / fcc array in both cases.</text></svg>'
     return s
 
 def fig_defects():
@@ -176,7 +190,7 @@ def fig_defects():
 def page(rel, title, lede, body, crumb=""):
     depth = rel.count("/")
     cls = "home" if rel == "index.html" else "page"
-    field = """<figure class="field hero-field"><svg viewBox="0 0 720 220" role="img" aria-label="Simple cubic, body-centred cubic and face-centred cubic unit cells"><g fill="none" stroke="#f4f3ee" stroke-width="2"><path d="M40 160 L40 80 L120 80 L120 160 Z M60 140 L60 60 L140 60 L140 140 M40 80 L60 60 M120 80 L140 60 M120 160 L140 140"/><path d="M280 160 L280 80 L360 80 L360 160 Z M300 140 L300 60 L380 60 L380 140 M280 80 L300 60 M360 80 L380 60 M360 160 L380 140"/><path d="M520 160 L520 80 L600 80 L600 160 Z M540 140 L540 60 L620 60 L620 140 M520 80 L540 60 M600 80 L620 60 M600 160 L620 140"/></g><g fill="#f4f3ee"><circle cx="40" cy="160" r="7"/><circle cx="40" cy="80" r="7"/><circle cx="120" cy="80" r="7"/><circle cx="120" cy="160" r="7"/><circle cx="140" cy="60" r="7"/><circle cx="140" cy="140" r="7"/><circle cx="280" cy="160" r="7"/><circle cx="280" cy="80" r="7"/><circle cx="360" cy="80" r="7"/><circle cx="360" cy="160" r="7"/><circle cx="380" cy="60" r="7"/><circle cx="380" cy="140" r="7"/><circle cx="320" cy="110" r="7"/><circle cx="520" cy="160" r="7"/><circle cx="520" cy="80" r="7"/><circle cx="600" cy="80" r="7"/><circle cx="600" cy="160" r="7"/><circle cx="620" cy="60" r="7"/><circle cx="620" cy="140" r="7"/><circle cx="560" cy="120" r="7"/></g><g fill="#f4f3ee" font-family="Radio Canada, sans-serif" font-size="15"><text x="40" y="200">Simple cubic</text><text x="280" y="200">Body-centred cubic</text><text x="520" y="200">Face-centred cubic</text></g></svg></figure>"""
+    field = """<figure class="field hero-field"><svg viewBox="0 0 720 220" role="img" aria-label="Simple cubic, body-centred cubic and face-centred cubic unit cells"><g fill="none" stroke="#f4f3ee" stroke-width="2"><path d="M40 160 L40 80 L120 80 L120 160 Z M60 140 L60 60 L140 60 L140 140 M40 80 L60 60 M120 80 L140 60 M120 160 L140 140"/><path d="M280 160 L280 80 L360 80 L360 160 Z M300 140 L300 60 L380 60 L380 140 M280 80 L300 60 M360 80 L380 60 M360 160 L380 140"/><path d="M520 160 L520 80 L600 80 L600 160 Z M540 140 L540 60 L620 60 L620 140 M520 80 L540 60 M600 80 L620 60 M600 160 L620 140"/></g><g fill="#f4f3ee"><circle cx="40" cy="160" r="7"/><circle cx="40" cy="80" r="7"/><circle cx="120" cy="80" r="7"/><circle cx="120" cy="160" r="7"/><circle cx="140" cy="60" r="7"/><circle cx="140" cy="140" r="7"/><circle cx="280" cy="160" r="7"/><circle cx="280" cy="80" r="7"/><circle cx="360" cy="80" r="7"/><circle cx="360" cy="160" r="7"/><circle cx="380" cy="60" r="7"/><circle cx="380" cy="140" r="7"/><circle cx="320" cy="110" r="7"/><circle cx="520" cy="160" r="7"/><circle cx="520" cy="80" r="7"/><circle cx="600" cy="80" r="7"/><circle cx="600" cy="160" r="7"/><circle cx="620" cy="60" r="7"/><circle cx="620" cy="140" r="7"/><circle cx="560" cy="120" r="7"/><circle cx="570" cy="70" r="7"/><circle cx="610" cy="110" r="7"/></g><g fill="#f4f3ee" font-family="Radio Canada, sans-serif" font-size="15"><text x="40" y="200">Simple cubic</text><text x="280" y="200">Body-centred cubic</text><text x="520" y="200">Face-centred cubic</text></g></svg></figure>"""
     prefix = "../" * depth if depth else ""
     # rel like chapters/01.../x.html -> depth 2, prefix ../../ ; index at root depth 0
     return f"""<!doctype html>
@@ -374,7 +388,7 @@ B12 = f"""
 {fig("Perovskite CaTiO3: Ca on the corners, O on the face centres, Ti at the body centre.", fig_perovskite())}
 <h2>Perovskite, CaTiO<sub>3</sub></h2>
 <p>Named after the mineral CaTiO<sub>3</sub>. O<sup>2−</sup> ions, along with the larger cation (Ca<sup>2+</sup>), form a ccp array in which the octahedral holes formed by O<sup>2−</sup> are occupied by the smaller cation (Ti<sup>4+</sup>). In the unit cell, the eight corners of the cube are occupied by Ca<sup>2+</sup>, O<sup>2−</sup> are placed at the centres of the six faces, and Ti<sup>4+</sup> is placed at the centre of the cube.</p>
-<div class="formula">Ca2+: 8 × 1/8 = 1<br>O2−: 6 × 1/2 = 3<br>Ti4+: 1<br>CaTiO3</div>
+<div class="formula">Ca2+: 8 × 1/8 = 1<br>O2−: 6 × 1/2 = 3<br>Ti4+: 1<br>CaTiO<sub>3</sub></div>
 <p>The structure can also be interpreted in terms of ReO<sub>3</sub>: the Re positions are occupied by Ti<sup>4+</sup>, while Ca<sup>2+</sup> occupies the centre of the cube. Ti<sup>4+</sup> is octahedrally surrounded by O<sup>2−</sup>, while Ca<sup>2+</sup> is surrounded by 12 O<sup>2−</sup> ions.</p>
 <table><thead><tr><th>Charge combination</th><th>Examples</th></tr></thead><tbody>
 <tr><td>A<sup>II</sup> B<sup>IV</sup> O<sub>3</sub></td><td>A = Ca, Sr, Ba; B = Ti, Zr, Ge, Sn</td></tr>
@@ -412,10 +426,10 @@ B14 = f"""
 <p>The crossed-out words in the photograph are “crystal” (before CFSE) and “octa” (before “oct”). The sentence is about spinel oxides, AB<sub>2</sub>O<sub>4</sub>.</p>
 <h2>Normal spinel</h2>
 <p>Named after the mineral spinel, MgAl<sub>2</sub>O<sub>4</sub>. It consists of a ccp array of oxide ions in which the divalent metal ion (Mg<sup>2+</sup>) occupies 1/8 of the tetrahedral holes and the trivalent metal ion (Al<sup>3+</sup>) occupies 1/2 of the octahedral holes. In a ccp anion sublattice there is one octahedral hole and two tetrahedral holes per anion. There are four oxides per formula unit, and consequently four octahedral holes and eight tetrahedral holes.</p>
-<div class="formula">Normal: (AII)tet (BIII)2oct O4</div>
+<div class="formula">Normal: (A<sup>II</sup>)<sub>tet</sub> (B<sup>III</sup>)<sub>2oct</sub> O<sub>4</sub></div>
 <h2>Inverse spinel</h2>
 <p>In an inverse spinel, half of the B ions occupy 1/8 of the tetrahedral holes, and A and the other half of B occupy 1/2 of the octahedral holes in the ccp array of O<sup>2−</sup>.</p>
-<div class="formula">Inverse: BIII tet [ AII BIII ]oct O4</div>
+<div class="formula">Inverse: B<sup>III</sup><sub>tet</sub> [A<sup>II</sup> B<sup>III</sup>]<sub>oct</sub> O<sub>4</sub></div>
 {fig("Normal against inverse: which cation sits in which hole.", fig_spinel())}
 <h2>Why CFSE decides it</h2>
 <p>For transition-metal oxide spinels, O<sup>2−</sup> is a weak-field ligand, so the ions are usually high spin. The structure that forms is the one with the larger total CFSE. The octahedral site preference energy (OSPE) is CFSE(oct) − CFSE(tet), with Δ<sub>t</sub> = 4/9 Δ<sub>o</sub>. Its size depends on the d-electron count:</p>
