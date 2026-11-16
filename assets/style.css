@@ -38,7 +38,7 @@
 .chapter-list li { display: flex; justify-content: space-between; gap: var(--space-lg); align-items: baseline; flex-wrap: wrap; padding: var(--space-lg) 0; border-top: 1px solid var(--rule); transition: transform 250ms var(--ease-out); }
 .chapter-list li:last-child { border-bottom: 1px solid var(--rule); }
 .chapter-list li:hover { transform: translateY(-2px); }
-.chapter-list h2 { font-size: 1.375rem; line-height: 1.25; }
+.chapter-list h2 { font-size: var(--text-title); line-height: 1.25; }
 .chapter-list h2 a { text-decoration: none; }
 .chapter-list h2 a:hover { color: var(--accent); }
 .chapter-list p { color: var(--muted); margin-top: var(--space-xs); }
