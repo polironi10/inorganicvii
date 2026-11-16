@@ -1,12 +1,12 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scrollbar-color: var(--muted) var(--paper); }
 html, body { overflow-x: clip; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.65; -webkit-font-smoothing: antialiased; caret-color: var(--accent); }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.65; -webkit-font-smoothing: antialiased; caret-color: var(--accent); }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
 h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; overflow-wrap: break-word; text-wrap: balance; }
-h1 { font-size: 2.75rem; } h2 { font-size: 1.875rem; } h3 { font-size: 1.375rem; line-height: 1.25; }
+h1 { font-size: 2.75rem; } h2 { font-size: 1.875rem; } h3 { font-size: var(--text-title); line-height: 1.25; }
 h2[id], h3[id] { scroll-margin-top: 1rem; }
 p { margin: 0; text-wrap: pretty; }
 img, video { max-width: 100%; height: auto; display: block; }
@@ -17,8 +17,7 @@ button, input, select, textarea { font: inherit; }
 .num, td.num { font-variant-numeric: tabular-nums; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (max-width: 40rem) {
-  h1 { font-size: 2rem; } h2 { font-size: 1.625rem; } h3 { font-size: 1.25rem; }
-  body { font-size: 1rem; }
+  h1 { font-size: 2rem; } h2 { font-size: 1.625rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
